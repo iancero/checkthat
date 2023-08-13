@@ -6,6 +6,7 @@ output: github_document
 
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
+  eval = FALSE, # TODO: delete this line when package has functional examples
   collapse = TRUE,
   comment = "#>",
   fig.path = "man/figures/README-",
@@ -22,14 +23,14 @@ knitr::opts_chunk$set(
 [![Codecov test coverage](https://codecov.io/gh/iancero/checkthat/branch/main/graph/badge.svg)](https://app.codecov.io/gh/iancero/checkthat?branch=main)
 <!-- badges: end -->
 
-The goal of checkthat is to ...
+The goal of checkthat is to integrate testing into your data manipulation pipelines.
 
 ## Installation
 
 You can install the development version of checkthat like so:
 
-``` r
-# FILL THIS IN! HOW CAN PEOPLE INSTALL YOUR DEV PACKAGE?
+```{r, eval=FALSE}
+devtools::install_github('iancero/checkthat')
 ```
 
 ## Example
@@ -38,21 +39,51 @@ This is a basic example which shows you how to solve a common problem:
 
 ```{r example}
 library(checkthat)
-## basic example code
+
+df |> 
+  check_that(
+    all(cyl) >= 4,
+    some(cyl < 8, at_least = .25), 
+    some(disp > 200, at_least = .10, at_most = .75),
+    whenever(cyl == 1, mpg == 21.0), # whenever cyl is 1, mpg should be 21
+    specific_case(
+      .id = row_number() == 1,
+      expected = drat == 3.90
+      
+    ) # throws an error if the .id criterion is not unique
+  )
+
 ```
 
-What is special about using `README.Rmd` instead of just `README.md`? You can include R chunks like so:
 
-```{r cars}
-summary(cars)
-```
 
-You'll still need to render `README.Rmd` regularly, to keep `README.md` up-to-date. `devtools::build_readme()` is handy for this.
 
-You can also embed plots, for example:
+## Alternatives
 
-```{r pressure, echo = FALSE}
-plot(pressure)
-```
+There are two pre-existing packages that served as inspiration for checkthat. They are both quite good and, depending on your use case, might be a better choice for you.
 
-In that case, don't forget to commit and push the resulting figure files, so they display on GitHub and CRAN.
+- [**testthat**](https://testthat.r-lib.org/) implements **unit testing for packages** and is currently the most popular testing package for R. If your goal is to develop a package - rather than conduct a data analysis - then testthat will be a much better choice than checkthat.
+
+- [**testdat**](https://socialresearchcentre.github.io/testdat/index.html) package is inspired by testhat and - like checkthat - also implements **unit testing for data manipulation**. It is different from checkthat in two ways. First, it is a more mature package (i.e., less buggy, more feature rich) than checkthat. Second, whereas checkthat is designed to integrate tests into data manipulation pipelines, testdat is designed to place tests in separate commands or files. Thus, as checkthat matures, the difference between the two packages will become largely stylistic.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

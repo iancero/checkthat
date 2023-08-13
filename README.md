@@ -14,7 +14,8 @@ status](https://www.r-pkg.org/badges/version/checkthat)](https://CRAN.R-project.
 coverage](https://codecov.io/gh/iancero/checkthat/branch/main/graph/badge.svg)](https://app.codecov.io/gh/iancero/checkthat?branch=main)
 <!-- badges: end -->
 
-The goal of checkthat is to …
+The goal of checkthat is to integrate testing into your data
+manipulation pipelines.
 
 ## Installation
 
@@ -33,26 +34,24 @@ library(checkthat)
 ## basic example code
 ```
 
-What is special about using `README.Rmd` instead of just `README.md`?
-You can include R chunks like so:
+## Alternatives
 
-``` r
-summary(cars)
-#>      speed           dist       
-#>  Min.   : 4.0   Min.   :  2.00  
-#>  1st Qu.:12.0   1st Qu.: 26.00  
-#>  Median :15.0   Median : 36.00  
-#>  Mean   :15.4   Mean   : 42.98  
-#>  3rd Qu.:19.0   3rd Qu.: 56.00  
-#>  Max.   :25.0   Max.   :120.00
-```
+There are two pre-existing packages that served as inspiration for
+checkthat. They are both quite good and, depending on your use case,
+might be a better choice for you.
 
-You’ll still need to render `README.Rmd` regularly, to keep `README.md`
-up-to-date. `devtools::build_readme()` is handy for this.
+- [**testthat**](https://testthat.r-lib.org/) implements **unit testing
+  for packages** and is currently the most popular testing package
+  for R. If your goal is to develop a package - rather than conduct a
+  data analysis - then testthat will be a much better choice than
+  checkthat.
 
-You can also embed plots, for example:
-
-<img src="man/figures/README-pressure-1.png" width="100%" />
-
-In that case, don’t forget to commit and push the resulting figure
-files, so they display on GitHub and CRAN.
+- [**testdat**](https://socialresearchcentre.github.io/testdat/index.html)
+  package is inspired by testhat and (like checkthat) also implements
+  **unit testing for data manipulation**. It is different from checkthat
+  in at least two ways. First, it is currently a more mature package (i.e., less buggy,
+  more feature rich) than checkthat. Second, whereas checkthat is
+  designed to integrate tests into data manipulation pipelines, testdat
+  is designed to place tests in separate commands or files. Thus, as
+  checkthat matures, the difference between the two packages will become
+  largely stylistic.
