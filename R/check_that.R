@@ -12,5 +12,5 @@ check_that <- function(.data, ..., print = TRUE, raise_error = TRUE, encourage =
     cli_throw_test_error()
   }
 
-  .data
+  invisible(.data)
 }
