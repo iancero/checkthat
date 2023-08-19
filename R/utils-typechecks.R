@@ -1,4 +1,4 @@
-is_integer <- function(x) {
+is_integerlike <- function(x) {
   if (!is.numeric(x)){
     return(FALSE)
   }
@@ -31,15 +31,7 @@ validate_proportion <- function(x){
 }
 
 is_count <- function(x, include_zero = TRUE) {
-  if (!is.numeric(x)){
-    return(FALSE)
-  }
-
-  if (length(x) != 1){
-    return(FALSE)
-  }
-
-  if (!is_integer(x)){
+  if (!is_integerlike(x)){
     return(FALSE)
   }
 
