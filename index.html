@@ -62,7 +62,7 @@
 </h1></div>
 <!-- badges: start -->
 
-<p>The goal of checkthat is to …</p>
+<p>The goal of checkthat is to integrate testing into your data manipulation pipelines.</p>
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
@@ -77,20 +77,15 @@
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/iancero/checkthat" class="external-link">checkthat</a></span><span class="op">)</span></span>
 <span><span class="co">## basic example code</span></span></code></pre></div>
-<p>What is special about using <code>README.Rmd</code> instead of just <code>README.md</code>? You can include R chunks like so:</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">cars</span><span class="op">)</span></span>
-<span><span class="co">#&gt;      speed           dist       </span></span>
-<span><span class="co">#&gt;  Min.   : 4.0   Min.   :  2.00  </span></span>
-<span><span class="co">#&gt;  1st Qu.:12.0   1st Qu.: 26.00  </span></span>
-<span><span class="co">#&gt;  Median :15.0   Median : 36.00  </span></span>
-<span><span class="co">#&gt;  Mean   :15.4   Mean   : 42.98  </span></span>
-<span><span class="co">#&gt;  3rd Qu.:19.0   3rd Qu.: 56.00  </span></span>
-<span><span class="co">#&gt;  Max.   :25.0   Max.   :120.00</span></span></code></pre></div>
-<p>You’ll still need to render <code>README.Rmd</code> regularly, to keep <code>README.md</code> up-to-date. <code>devtools::build_readme()</code> is handy for this.</p>
-<p>You can also embed plots, for example:</p>
-<p><img src="reference/figures/README-pressure-1.png" width="100%"></p>
-<p>In that case, don’t forget to commit and push the resulting figure files, so they display on GitHub and CRAN.</p>
+</div>
+<div class="section level2">
+<h2 id="alternatives">Alternatives<a class="anchor" aria-label="anchor" href="#alternatives"></a>
+</h2>
+<p>There are two pre-existing packages that served as inspiration for checkthat. They are both quite good and, depending on your use case, might be a better choice for you.</p>
+<ul>
+<li><p><a href="https://testthat.r-lib.org/" class="external-link"><strong>testthat</strong></a> implements <strong>unit testing for packages</strong> and is currently the most popular testing package for R. If your goal is to develop a package - rather than conduct a data analysis - then testthat will be a much better choice than checkthat.</p></li>
+<li><p><a href="https://socialresearchcentre.github.io/testdat/index.html" class="external-link"><strong>testdat</strong></a> package is inspired by testhat and (like checkthat) also implements <strong>unit testing for data manipulation</strong>. It is different from checkthat in at least two ways. First, it is currently a more mature package (i.e., less buggy, more feature rich) than checkthat. Second, whereas checkthat is designed to integrate tests into data manipulation pipelines, testdat is designed to place tests in separate commands or files. Thus, as checkthat matures, the difference between the two packages will become largely stylistic.</p></li>
+</ul>
 </div>
 </div>
   </main><aside class="col-md-3"><div class="links">
