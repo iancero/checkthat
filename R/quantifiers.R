@@ -132,6 +132,17 @@ some <- function(logical_vec, ...){
 
   dots <- rlang::list2(...)
 
+  if(length(dots) < 1){
+    stop(
+      paste(
+        "... is empty, no specific quantifiers given (e.g., at_least = .50).",
+        "This is ambiguous. If you intend to test that there are more",
+        "than 0 true cases, please use any() instead.",
+        "If you want to test something more specific than that, please specify",
+        "that in ... (e.g., some(letters %in% c('a', 'b', 'c'), more_than = 2)."
+      ))
+  }
+
   if(any(rlang::names2(dots) == "")){
     stop('all arguments must be named')
   }
@@ -145,18 +156,19 @@ some <- function(logical_vec, ...){
     all()
 }
 
-
-
-whenever <- function(is_observed, then_expect){
-
-  # TODO: make this function like some, able to accept aribtrary comparators
-  # (e.g., whenever(cyl == 1, mpg == 21.0, at_least = .50) )
-
+whenever <- function(is_observed, then_expect, ...){
   validate_logical_vec(is_observed)
-  validate_logical_vec(then_expect)
 
-  all(then_expect[is_observed])
+  logical_vec <- then_expect[is_observed]
+
+  if(length(list(...)) == 0){
+    test_result <- all(logical_vec)
+    return(test_result)
+  }
+
+  some(logical_vec, ...)
 }
+
 
 specifically <- function(case, ...){
   # TODO: unique_id should work with row_number(), as well as a unique ID column
