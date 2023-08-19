@@ -130,7 +130,7 @@ validate_logical_vec <- function(logical_vec) {
   TRUE
 }
 
-some <- function(logical_vec, ...) {
+some_of <- function(logical_vec, ...) {
   validate_logical_vec(logical_vec)
 
   dots <- rlang::list2(...)
@@ -142,7 +142,7 @@ some <- function(logical_vec, ...) {
         "This is ambiguous. If you intend to test that there are more",
         "than 0 true cases, please use any() instead.",
         "If you want to test something more specific than that, please specify",
-        "that in ... (e.g., some(letters %in% c('a', 'b', 'c'), more_than = 2)."
+        "that in ... (e.g., some_of(letters %in% c('a', 'b'), at_least = 2)."
       )
     )
   }
@@ -170,17 +170,11 @@ whenever <- function(is_observed, then_expect, ...) {
     return(test_result)
   }
 
-  some(logical_vec, ...)
+  some_of(logical_vec, ...)
 }
 
 
 specifically <- function(case, ...) {
-  # TODO: unique_id should work with row_number(), as well as a unique ID column
-  # this likely requires a test of uniqueness. What distinguishes this function
-  # from when() is that
-
-  # TODO: dots should be logical conditions (e.g., cyl == 4, mpg == 32.3)
-
   dots <- rlang::list2(...)
 
   if (is_count(case, include_zero = F)) {
