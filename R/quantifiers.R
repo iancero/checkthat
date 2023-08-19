@@ -1,17 +1,17 @@
-aggregator <- function(logical_vec, type = NULL, na.rm = FALSE){
+aggregator <- function(logical_vec, type = NULL, na.rm = FALSE) {
   validate_logical_vec(logical_vec)
 
-  if (length(type) != 1){
-    stop('length(type) != 1')
+  if (length(type) != 1) {
+    stop("length(type) != 1")
   }
 
-  if(!type %in% c('p', 'n')){
+  if (!type %in% c("p", "n")) {
     stop("type must be either 'p' (for proportions) or 'n' (for counts)")
   }
 
   switch(type,
-         p = prop(logical_vec, na.rm = na.rm),
-         n = sum(logical_vec, na.rm = na.rm)
+    p = prop(logical_vec, na.rm = na.rm),
+    n = sum(logical_vec, na.rm = na.rm)
   )
 }
 
@@ -29,19 +29,20 @@ quantifier <- function(operator) {
 
     if (!is.null(p)) {
       validate_proportion(p)
-      type <- 'p'
+      type <- "p"
       criteron_val <- p
     }
 
     if (!is.null(n)) {
       validate_count(n)
-      type <- 'n'
+      type <- "n"
       criteron_val <- n
     }
 
     operator(
       e1 = aggregator(logical_vec, type, na.rm = na.rm),
-      e2 = criteron_val)
+      e2 = criteron_val
+    )
   }
 }
 
@@ -59,7 +60,7 @@ quantifier <- function(operator) {
 prop <- function(logical_vec, na.rm = FALSE) {
   validate_logical_vec(logical_vec)
 
-  if(na.rm){
+  if (na.rm) {
     logical_vec <- logical_vec[!is.na(logical_vec)]
   }
 
@@ -67,28 +68,30 @@ prop <- function(logical_vec, na.rm = FALSE) {
 }
 
 is_p_or_n <- function(num, error_on_1 = TRUE, error_on_nothing = TRUE) {
-  if(num == 1 & error_on_1){
+  if (num == 1 & error_on_1) {
     stop(
       paste(
-        'Cannot safely determine if 1 should be treated as n = 1 or p = 1.',
-        'In cases like this, you usually want to use a more specific function.',
-        'For example, if you intend p = 1.0, all() is likely better',
-        'or you can also use the _p() family of functions',
-        '(e.g., exactly_p(), at_least_p(), at_most_p()).',
-        'Alternatively, if you meant, n = 1, use the _n() family of functions',
-        '(e.g., exactly_n(), at_least_n(), at_most_n()).'))
+        "Cannot safely determine if 1 should be treated as n = 1 or p = 1.",
+        "In cases like this, you usually want to use a more specific function.",
+        "For example, if you intend p = 1.0, all() is likely better",
+        "or you can also use the _p() family of functions",
+        "(e.g., exactly_p(), at_least_p(), at_most_p()).",
+        "Alternatively, if you meant, n = 1, use the _n() family of functions",
+        "(e.g., exactly_n(), at_least_n(), at_most_n())."
+      )
+    )
   }
 
-  if (is_proportion(num)){
-    return('p')
+  if (is_proportion(num)) {
+    return("p")
   }
 
-  if (is_count(num)){
-    return('n')
+  if (is_count(num)) {
+    return("n")
   }
 
   if (error_on_nothing) {
-    stop('Value is neither a valid proportion (p) or count (n)')
+    stop("Value is neither a valid proportion (p) or count (n)")
   }
 
   FALSE
@@ -103,7 +106,7 @@ is_logical_vec <- function(logical_vec) {
     return(FALSE)
   }
 
-  if(all(is.na(logical_vec))){
+  if (all(is.na(logical_vec))) {
     return(FALSE)
   }
 
@@ -120,19 +123,19 @@ validate_logical_vec <- function(logical_vec) {
     stop("logical_vec must have length of at least 1")
   }
 
-  if(all(is.na(logical_vec))){
-    warning('All values of logical_vec are NA')
+  if (all(is.na(logical_vec))) {
+    warning("All values of logical_vec are NA")
   }
 
   TRUE
 }
 
-some <- function(logical_vec, ...){
+some <- function(logical_vec, ...) {
   validate_logical_vec(logical_vec)
 
   dots <- rlang::list2(...)
 
-  if(length(dots) < 1){
+  if (length(dots) < 1) {
     stop(
       paste(
         "... is empty, no specific quantifiers given (e.g., at_least = .50).",
@@ -140,11 +143,12 @@ some <- function(logical_vec, ...){
         "than 0 true cases, please use any() instead.",
         "If you want to test something more specific than that, please specify",
         "that in ... (e.g., some(letters %in% c('a', 'b', 'c'), more_than = 2)."
-      ))
+      )
+    )
   }
 
-  if(any(rlang::names2(dots) == "")){
-    stop('all arguments must be named')
+  if (any(rlang::names2(dots) == "")) {
+    stop("all arguments must be named")
   }
 
   query_params <- purrr::map(dots, ~ list(val = .x, type = is_p_or_n(.x)))
@@ -156,12 +160,12 @@ some <- function(logical_vec, ...){
     all()
 }
 
-whenever <- function(is_observed, then_expect, ...){
+whenever <- function(is_observed, then_expect, ...) {
   validate_logical_vec(is_observed)
 
   logical_vec <- then_expect[is_observed]
 
-  if(length(list(...)) == 0){
+  if (length(list(...)) == 0) {
     test_result <- all(logical_vec)
     return(test_result)
   }
@@ -170,7 +174,7 @@ whenever <- function(is_observed, then_expect, ...){
 }
 
 
-specifically <- function(case, ...){
+specifically <- function(case, ...) {
   # TODO: unique_id should work with row_number(), as well as a unique ID column
   # this likely requires a test of uniqueness. What distinguishes this function
   # from when() is that
@@ -179,19 +183,19 @@ specifically <- function(case, ...){
 
   dots <- rlang::list2(...)
 
-  if(is_count(case, include_zero = F)){
+  if (is_count(case, include_zero = F)) {
     case_num <- case
-
-  } else if (length(which(case)) == 1){
+  } else if (length(which(case)) == 1) {
     case_num <- which(case)
-
   } else {
     stop(
       paste(
         "case is either not a valid count (i.e., a row number)",
         "or 'length(which(case)) == 1' != TRUE",
         "(e.g., letters == 'g'). If you want to check specific situations that",
-        "potentially affect multiple rows, use when() instead."))
+        "potentially affect multiple rows, use when() instead."
+      )
+    )
   }
 
   dots |>
