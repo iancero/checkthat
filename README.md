@@ -22,7 +22,7 @@ manipulation pipelines.
 You can install the development version of checkthat like so:
 
 ``` r
-# FILL THIS IN! HOW CAN PEOPLE INSTALL YOUR DEV PACKAGE?
+devtools::install_github('iancero/checkthat')
 ```
 
 ## Example
@@ -30,8 +30,35 @@ You can install the development version of checkthat like so:
 This is a basic example which shows you how to solve a common problem:
 
 ``` r
+stop('Banana')
+```
+
+``` r
 library(checkthat)
-## basic example code
+
+df <- mtcars
+df$id <- rownames(mtcars)
+rownames(df) <- NULL
+
+df <- df[, c('id', names(df)[names(df) != 'id'])]
+
+mtcars |> 
+  check_that(
+    all(cyl >= 4),
+    any(cyl < 8),
+    
+    some(cyl < 8, at_least = 5),
+    some(disp > 200, at_least = .10, less_than = 75),
+    
+    whenever(
+      is_observed = cyl == 6, 
+      then_expect = mpg < 50.0),
+    
+    specifically(case = 2, mpg == 21, cyl < 8),
+    specifically(case = id == 'Mazda RX4 Wag', hp == 110)
+  )
+
+df2
 ```
 
 ## Alternatives
@@ -47,9 +74,9 @@ might be a better choice for you.
   checkthat.
 
 - [**testdat**](https://socialresearchcentre.github.io/testdat/index.html)
-  package is inspired by testhat and (like checkthat) also implements
+  package is inspired by testhat and - like checkthat - also implements
   **unit testing for data manipulation**. It is different from checkthat
-  in at least two ways. First, it is currently a more mature package (i.e., less buggy,
+  in two ways. First, it is a more mature package (i.e., less buggy,
   more feature rich) than checkthat. Second, whereas checkthat is
   designed to integrate tests into data manipulation pipelines, testdat
   is designed to place tests in separate commands or files. Thus, as

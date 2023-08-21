@@ -37,21 +37,37 @@ devtools::install_github('iancero/checkthat')
 
 This is a basic example which shows you how to solve a common problem:
 
+```{r}
+stop('Banana')
+```
+
+
 ```{r example}
 library(checkthat)
 
-df |> 
+df <- mtcars
+df$id <- rownames(mtcars)
+rownames(df) <- NULL
+
+df <- df[, c('id', names(df)[names(df) != 'id'])]
+
+mtcars |> 
   check_that(
-    all(cyl) >= 4,
-    some(cyl < 8, at_least = .25), 
-    some(disp > 200, at_least = .10, at_most = .75),
-    whenever(cyl == 1, mpg == 21.0), # whenever cyl is 1, mpg should be 21
-    specific_case(
-      .id = row_number() == 1,
-      expected = drat == 3.90
-      
-    ) # throws an error if the .id criterion is not unique
+    all(cyl >= 4),
+    any(cyl < 8),
+    
+    some(cyl < 8, at_least = 5),
+    some(disp > 200, at_least = .10, less_than = 75),
+    
+    whenever(
+      is_observed = cyl == 6, 
+      then_expect = mpg < 50.0),
+    
+    specifically(case = 2, mpg == 21, cyl < 8),
+    specifically(case = id == 'Mazda RX4 Wag', hp == 110)
   )
+
+df2
 
 ```
 
