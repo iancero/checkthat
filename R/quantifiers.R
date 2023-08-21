@@ -114,21 +114,7 @@ is_logical_vec <- function(logical_vec) {
 }
 
 
-validate_logical_vec <- function(logical_vec) {
-  if (!is.logical(logical_vec)) {
-    stop("logical_vec must be a logical vector")
-  }
 
-  if (length(logical_vec) < 1) {
-    stop("logical_vec must have length of at least 1")
-  }
-
-  if (all(is.na(logical_vec))) {
-    warning("All values of logical_vec are NA")
-  }
-
-  TRUE
-}
 
 some_of <- function(logical_vec, ...) {
   validate_logical_vec(logical_vec)
