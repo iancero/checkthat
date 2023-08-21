@@ -36,7 +36,7 @@ cli_check_success <- function() {
 }
 
 cli_add_encouragement <- function(msg = encouraging_message(), p = .33) {
-  if (runif(1) < p) {
+  if (stats::runif(1) < p) {
     cli::start_app(theme = checkthat_cli_theme())
     cli::cli_text("")
     cli::cli_text(msg)
@@ -59,7 +59,9 @@ cli_throw_test_error <- function() {
 }
 
 cli_check_summary <- function(test_results, test_labs) {
-  assertthat::are_equal(length(test_results), length(test_labs))
+  if (length(test_results) != length(test_labs)){
+    stop("length(test_results) != length(test_labs)")
+  }
 
   cli::start_app(theme = checkthat_cli_theme())
   cli::cli_h1("Data Checks")
