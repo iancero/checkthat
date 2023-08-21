@@ -122,5 +122,3 @@ test_that("validate_logical_vec correctly warns for all NA values", {
   expect_warning(validate_logical_vec(NA), regexp = "All values of logical_vec are NA")
   expect_warning(validate_logical_vec(c(NA, NA, NA)), regexp = "All values of logical_vec are NA")
 })
-
-
