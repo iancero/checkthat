@@ -22,3 +22,5 @@ Imports:
     glue (>= 1.6.2),
     purrr (>= 1.0.1),
     rlang (>= 1.1.1)
+Depends: 
+    R (>= 4.3)
