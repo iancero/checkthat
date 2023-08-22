@@ -14,10 +14,10 @@ Depends:
 Imports: 
     cli (>= 3.6.1),
     glue (>= 1.6.2),
-    lifecycle,
-    purrr (>= 1.0.1),
+    lifecycle (>= 1.0.3),
+    purrr (>= 1.0.2),
     rlang (>= 1.1.1),
-    withr
+    withr (>= 2.5.0)
 Suggests: 
     dplyr (>= 1.1.2),
     lubridate (>= 1.9.2),
