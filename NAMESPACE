@@ -2,3 +2,6 @@
 
 export(at_least)
 export(prop)
+import(rlang)
+importFrom(glue,glue)
+importFrom(lifecycle,deprecated)

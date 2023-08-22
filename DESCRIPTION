@@ -1,5 +1,5 @@
 Package: checkthat
-Title: What the Package Does (One Line, Title Case)
+Title: Implements Unit Testing For Data Manipulation Pipelines
 Version: 0.0.0.9000
 Authors@R: 
     person("Ian", "Cero", , "ian_cero@urmc.rochester.edu", role = c("aut", "cre"),
@@ -14,8 +14,10 @@ Depends:
 Imports: 
     cli (>= 3.6.1),
     glue (>= 1.6.2),
+    lifecycle,
     purrr (>= 1.0.1),
-    rlang (>= 1.1.1)
+    rlang (>= 1.1.1),
+    withr
 Suggests: 
     dplyr (>= 1.1.2),
     lubridate (>= 1.9.2),
