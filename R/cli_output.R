@@ -49,13 +49,7 @@ cli_throw_test_error <- function() {
   cli::start_app(theme = checkthat_cli_theme())
   cli::cli_text("")
   cli::cli_text("")
-  cli::cli_abort(
-    paste(
-      "At least one data check failed. Check your tests before moving on.",
-      "Note, if needed, you can prevent check_that from halting execution by",
-      "setting {.code raise_error = FALSE}."
-    )
-  )
+  cli::cli_abort("At least one data check failed.")
 }
 
 cli_check_summary <- function(test_results, test_labs) {
