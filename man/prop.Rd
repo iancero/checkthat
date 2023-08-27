@@ -2,18 +2,28 @@
 % Please edit documentation in R/quantifiers.R
 \name{prop}
 \alias{prop}
-\title{Placeholder}
+\title{Calculate Proportion of TRUE Values in a Logical Vector}
 \usage{
 prop(logical_vec, na.rm = FALSE)
 }
 \arguments{
-\item{logical_vec}{Another thought}
+\item{logical_vec}{A logical vector.}
 
-\item{na.rm}{a third thought}
+\item{na.rm}{Logical. Should missing values be removed before calculation?
+Behaves similar to \code{base::mean}, removing missing values
+from both the numerator and denominator of the proportion
+calculation.}
 }
 \value{
-a value
+The proportion of \code{TRUE} values in the logical vector.
 }
 \description{
-Here is a thought
+This function calculates the proportion of \code{TRUE} values in a logical
+vector.
 }
+\examples{
+prop(c(TRUE, TRUE, FALSE, TRUE)) # Returns 0.75
+prop(c(TRUE, FALSE, TRUE, FALSE, NA), na.rm = TRUE) # Returns 0.5
+
+}
+\keyword{exported}

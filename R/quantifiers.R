@@ -1,3 +1,25 @@
+#' Aggregate Logical Vector Values
+#'
+#' This internal function aggregates logical vector values based on the
+#' specified type of aggregation requested (proportion of summation).
+#' It is used by the package internally and not meant to be directly accessed by
+#' users.
+#'
+#' @param logical_vec A logical vector to be aggregated.
+#' @param type A character string indicating the type of aggregation.
+#'             Possible values: "p" for proportions, "n" for counts.
+#' @param na.rm Logical. Should missing values be removed when aggregating?
+#'
+#' @return Depending on the \code{type} parameter, returns either the proportion
+#'         of \code{TRUE} values in the logical vector or the count of
+#'         \code{TRUE} values.
+#'
+#' @examples
+#' logical_vector <- c(TRUE, TRUE, FALSE, TRUE, FALSE)
+#' aggregator(logical_vector, type = "p")
+#' aggregator(logical_vector, type = "n")
+#'
+#' @keywords internal
 aggregator <- function(logical_vec, type = NULL, na.rm = FALSE) {
   validate_logical_vec(logical_vec)
 
@@ -15,6 +37,40 @@ aggregator <- function(logical_vec, type = NULL, na.rm = FALSE) {
   )
 }
 
+#' Generate Quantification Functions
+#'
+#' This internal function is used to generate quantification functions for the
+#' package. It takes an operator function as an argument and returns a
+#' quantification function that operates on logical vectors using the provided
+#' operator.
+#'
+#' @param operator A binary operator function (e.g., \code{<}, \code{>},
+#'                \code{==}).
+#'
+#' @return A quantification function that takes logical vector(s) and a criteria
+#'        value (either proportion or count) and performs the specified
+#'        operation.
+#'
+#' @examples
+#' # Generate a function for checking if at least 50% of values are TRUE
+#' at_least_50_percent <- quantifier(`>=`)(p = 0.5)
+#'
+#' # Use the generated function on a logical vector
+#' at_least_50_percent(c(TRUE, TRUE, FALSE, TRUE)) # Returns TRUE
+#'
+#' @keywords internal
+#'
+#' @examples
+#' # The quantifier function generates other convenience functions like so
+#' at_least <- function(logical_vec, p = NULL, n = NULL, na.rm = FALSE) {
+#'   quantifier(`>=`)(logical_vec, p = p, n = n, na.rm = na.rm)
+#' }
+#'
+#' # Generate a function for checking if at least 50% of values are TRUE
+#' at_least_50_percent <- quantifier(`>=`)(p = 0.5)
+#'
+#' # Use the generated function on a logical vector
+#' at_least_50_percent(c(TRUE, TRUE, FALSE, TRUE)) # Returns TRUE
 quantifier <- function(operator) {
   function(logical_vec, p = NULL, n = NULL, na.rm = FALSE) {
     validate_logical_vec(logical_vec)
@@ -47,16 +103,26 @@ quantifier <- function(operator) {
 }
 
 
-#' Placeholder
+#' Calculate Proportion of TRUE Values in a Logical Vector
 #'
-#' Here is a thought
+#' This function calculates the proportion of \code{TRUE} values in a logical
+#' vector.
 #'
-#' @param logical_vec Another thought
-#' @param na.rm a third thought
+#' @param logical_vec A logical vector.
+#' @param na.rm Logical. Should missing values be removed before calculation?
+#'              Behaves similar to \code{base::mean}, removing missing values
+#'              from both the numerator and denominator of the proportion
+#'              calculation.
 #'
-#' @return a value
+#' @return The proportion of \code{TRUE} values in the logical vector.
+#'
+#' @examples
+#' prop(c(TRUE, TRUE, FALSE, TRUE)) # Returns 0.75
+#' prop(c(TRUE, FALSE, TRUE, FALSE, NA), na.rm = TRUE) # Returns 0.5
+#'
+#' @importFrom checkthat validate_logical_vec
+#' @keywords exported
 #' @export
-#'
 prop <- function(logical_vec, na.rm = FALSE) {
   validate_logical_vec(logical_vec)
 
@@ -67,6 +133,41 @@ prop <- function(logical_vec, na.rm = FALSE) {
   sum(logical_vec) / length(logical_vec)
 }
 
+
+#' Determine if a Value Represents a Proportion (p) or Count (n)
+#'
+#' This internal function determines if a given value represents a proportion
+#' (p) or a count (n). It is used by the package internally to handle cases
+#' where a value can be interpreted as either a proportion or a count. This
+#' function helps ensure consistent and safe handling of such values and is used
+#' as a check in several other package functions.
+#'
+#' @param num A numeric value to be evaluated.
+#' @param error_on_1 Logical. Should an error be raised if \code{num} is equal
+#'                    to 1? Defaults to \code{TRUE}. This is important in cases
+#'                    where 1 is an ambiguous case (e.g., it could represent
+#'                    a probability of exactly 1.0 or a count of exactly 1).
+#' @param error_on_nothing Logical. Should an error be raised if \code{num} is
+#'                          not a valid proportion (p) or count (n)? Defaults to
+#'                          \code{TRUE}.
+#'
+#' @return A character string: "p" if \code{num} represents a proportion, "n" if
+#'          it represents a count, and \code{FALSE} if neither applies.
+#'
+#' @examples
+#' # Determine if 0.5 is a proportion (p) or a count (n)
+#' is_p_or_n(0.5)  # Returns "p"
+#'
+#' # Determine if 10 is a proportion (p) or a count (n)
+#' is_p_or_n(10)  # Returns "n"
+#'
+#' # Determine if 1 is a proportion (p) or a count (n) and allow error on 1
+#' is_p_or_n(1, error_on_1 = TRUE)  # Throws an error
+#'
+#' # Determine if 1 is a proportion (p) or a count (n) and allow error on nothing
+#' is_p_or_n(1, error_on_nothing = TRUE)  # Throws an error
+#'
+#' @keywords internal
 is_p_or_n <- function(num, error_on_1 = TRUE, error_on_nothing = TRUE) {
   if (num == 1 & error_on_1) {
     stop(
@@ -97,6 +198,28 @@ is_p_or_n <- function(num, error_on_1 = TRUE, error_on_nothing = TRUE) {
   FALSE
 }
 
+#' Check if a Vector is a Valid Logical Vector
+#'
+#' This function checks if a given vector is a valid logical vector. A valid logical vector
+#' is one that contains only logical values (\code{TRUE} or \code{FALSE}), has a length of
+#' at least 1, and does not consist entirely of missing values (\code{NA}).
+#'
+#' @param logical_vec A vector to be evaluated.
+#'
+#' @return \code{TRUE} if \code{logical_vec} is a valid logical vector, otherwise \code{FALSE}.
+#'
+#' @examples
+#' # Check if a valid logical vector
+#' is_logical_vec(c(TRUE, FALSE, TRUE))  # Returns TRUE
+#'
+#' # Check if an empty vector
+#' is_logical_vec(c())  # Returns FALSE
+#'
+#' # Check if a vector with missing values
+#' is_logical_vec(c(TRUE, FALSE, NA))  # Returns TRUE
+#' is_logical_vec(c(NA, NA, NA))  # Returns FALSE
+#'
+#' @export
 is_logical_vec <- function(logical_vec) {
   if (!is.logical(logical_vec)) {
     return(FALSE)
