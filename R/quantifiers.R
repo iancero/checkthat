@@ -269,6 +269,7 @@ some_of <- function(logical_vec, ...) {
     all()
 }
 
+
 whenever <- function(is_observed, then_expect, ...) {
   validate_logical_vec(is_observed)
 
@@ -307,34 +308,112 @@ specifically <- function(case, ...) {
 }
 
 
-#' At least
+#' Facilitate "At Least" Comparison on Logical Vectors
 #'
-#' xxx
+#' This function facilitates a comparison to check if at least a specified proportion or count of values in a logical vector
+#' evaluate to \code{TRUE}.
 #'
-#' @param logical_vec a
-#' @param p a
-#' @param n b
-#' @param na.rm c
+#' @param logical_vec A logical vector.
+#' @param p Proportion value (0 to 1) to compare against.
+#' @param n Count value (integer) to compare against.
+#' @param na.rm Logical. Should missing values be removed before calculation?
 #'
-#' @return d
+#' @return \code{TRUE} if the condition is met for at least the specified proportion or count, otherwise \code{FALSE}.
+#' @examples
+#' # Check if at least 50% of values are TRUE
+#' at_least(c(TRUE, TRUE, FALSE), p = 0.5) # Returns TRUE
+#'
+#' @family quantifiers
+#'
 #' @export
-#'
 at_least <- function(logical_vec, p = NULL, n = NULL, na.rm = FALSE) {
   quantifier(`>=`)(logical_vec, p = p, n = n, na.rm = na.rm)
 }
 
+#' Facilitate "More Than" Comparison on Logical Vectors
+#'
+#' This function facilitates a comparison to check if more than a specified proportion or count of values in a logical vector
+#' evaluate to \code{TRUE}.
+#'
+#' @param logical_vec A logical vector.
+#' @param p Proportion value (0 to 1) to compare against.
+#' @param n Count value (integer) to compare against.
+#' @param na.rm Logical. Should missing values be removed before calculation?
+#'
+#' @return \code{TRUE} if the condition is met for more than the specified proportion or count, otherwise \code{FALSE}.
+#' @examples
+#' # Check if more than 70% of values are TRUE
+#' more_than(c(TRUE, TRUE, FALSE, TRUE), p = 0.7)  # Returns TRUE
+#'
+#' @family quantifiers
+#'
+#' @export
 more_than <- function(logical_vec, p = NULL, n = NULL, na.rm = FALSE) {
   quantifier(`>`)(logical_vec, p = p, n = n, na.rm = na.rm)
 }
 
+#' Facilitate "At Most" Comparison on Logical Vectors
+#'
+#' This function facilitates a comparison to check if at most a specified proportion or count of values in a logical vector
+#' evaluate to \code{TRUE}.
+#'
+#' @param logical_vec A logical vector.
+#' @param p Proportion value (0 to 1) to compare against.
+#' @param n Count value (integer) to compare against.
+#' @param na.rm Logical. Should missing values be removed before calculation?
+#'
+#' @return \code{TRUE} if the condition is met for at most the specified proportion or count, otherwise \code{FALSE}.
+#' @examples
+#' # Check if at most 20% of values are TRUE
+#' at_most(c(TRUE, FALSE, TRUE, TRUE), p = 0.2)  # Returns TRUE
+#'
+#' @family quantifiers
+#'
+#' @export
 at_most <- function(logical_vec, p = NULL, n = NULL, na.rm = FALSE) {
   quantifier(`<=`)(logical_vec, p = p, n = n, na.rm = na.rm)
 }
 
+#' Facilitate "Less Than" Comparison on Logical Vectors
+#'
+#' This function facilitates a comparison to check if less than a specified proportion or count of values in a logical vector
+#' evaluate to \code{TRUE}.
+#'
+#' @param logical_vec A logical vector.
+#' @param p Proportion value (0 to 1) to compare against.
+#' @param n Count value (integer) to compare against.
+#' @param na.rm Logical. Should missing values be removed before calculation?
+#'
+#' @return \code{TRUE} if the condition is met for less than the specified proportion or count, otherwise \code{FALSE}.
+#' @examples
+#' # Check if less than 10% of values are TRUE
+#' less_than(c(TRUE, FALSE, FALSE), p = 0.1)  # Returns FALSE
+#'
+#' @family quantifiers
+#'
+#' @export
 less_than <- function(logical_vec, p = NULL, n = NULL, na.rm = FALSE) {
   quantifier(`<`)(logical_vec, p = p, n = n, na.rm = na.rm)
 }
 
+#' Facilitate "Exactly Equal" Comparison on Logical Vectors
+#'
+#' This function facilitates a comparison to check if the proportion or count of values in a logical vector is exactly equal
+#' to a specified value.
+#'
+#' @param logical_vec A logical vector.
+#' @param p Proportion value (0 to 1) to compare against.
+#' @param n Count value (integer) to compare against.
+#' @param na.rm Logical. Should missing values be removed before calculation?
+#'
+#' @return \code{TRUE} if the proportion or count of values is exactly equal to the specified value, otherwise \code{FALSE}.
+#' @examples
+#' # Check if all values are TRUE
+#' exactly_equal(c(TRUE, TRUE, TRUE), p = 1.0)  # Returns TRUE
+#'
+#' @family quantifiers
+#'
+#' @export
 exactly_equal <- function(logical_vec, p = NULL, n = NULL, na.rm = FALSE) {
   quantifier(`==`)(logical_vec, p = p, n = n, na.rm = na.rm)
 }
