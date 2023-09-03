@@ -20,6 +20,7 @@
 #' aggregator(logical_vector, type = "n")
 #'
 #' @keywords internal
+#' @noRd
 aggregator <- function(logical_vec, type = NULL, na.rm = FALSE) {
   validate_logical_vec(logical_vec)
 
@@ -59,6 +60,7 @@ aggregator <- function(logical_vec, type = NULL, na.rm = FALSE) {
 #' at_least_50_percent(c(TRUE, TRUE, FALSE, TRUE)) # Returns TRUE
 #'
 #' @keywords internal
+#' @noRd
 #'
 #' @examples
 #' # The quantifier function generates other convenience functions like so
@@ -120,10 +122,12 @@ quantifier <- function(operator) {
 #' prop(c(TRUE, TRUE, FALSE, TRUE)) # Returns 0.75
 #' prop(c(TRUE, FALSE, TRUE, FALSE, NA), na.rm = TRUE) # Returns 0.5
 #'
-#' @importFrom checkthat validate_logical_vec
 #' @keywords exported
 #' @export
 prop <- function(logical_vec, na.rm = FALSE) {
+
+
+  # @importFrom checkthat validate_logical_vec
   validate_logical_vec(logical_vec)
 
   if (na.rm) {
@@ -155,6 +159,7 @@ prop <- function(logical_vec, na.rm = FALSE) {
 #'          it represents a count, and \code{FALSE} if neither applies.
 #'
 #' @examples
+#'
 #' # Determine if 0.5 is a proportion (p) or a count (n)
 #' is_p_or_n(0.5)  # Returns "p"
 #'
@@ -168,6 +173,7 @@ prop <- function(logical_vec, na.rm = FALSE) {
 #' is_p_or_n(1, error_on_nothing = TRUE)  # Throws an error
 #'
 #' @keywords internal
+#' @noRd
 is_p_or_n <- function(num, error_on_1 = TRUE, error_on_nothing = TRUE) {
   if (num == 1 & error_on_1) {
     stop(
