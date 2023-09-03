@@ -243,8 +243,15 @@ is_logical_vec <- function(logical_vec) {
 }
 
 
-
-
+#' Title
+#'
+#' @param logical_vec
+#' @param ...
+#'
+#' @return
+#' @export
+#'
+#' @examples
 some_of <- function(logical_vec, ...) {
   validate_logical_vec(logical_vec)
 
@@ -276,6 +283,16 @@ some_of <- function(logical_vec, ...) {
 }
 
 
+#' Title
+#'
+#' @param is_observed
+#' @param then_expect
+#' @param ...
+#'
+#' @return
+#' @export
+#'
+#' @examples
 whenever <- function(is_observed, then_expect, ...) {
   validate_logical_vec(is_observed)
 
@@ -290,7 +307,16 @@ whenever <- function(is_observed, then_expect, ...) {
 }
 
 
-specifically <- function(case, ...) {
+#' Title
+#'
+#' @param case
+#' @param ...
+#'
+#' @return
+#' @export
+#'
+#' @examples
+for_case <- function(case, ...) {
   dots <- rlang::list2(...)
 
   if (is_count(case, include_zero = F)) {
@@ -303,7 +329,7 @@ specifically <- function(case, ...) {
         "case is either not a valid count (i.e., a row number)",
         "or 'length(which(case)) == 1' != TRUE",
         "(e.g., letters == 'g'). If you want to check specific situations that",
-        "potentially affect multiple rows, use when() instead."
+        "potentially affect multiple rows, use whenever() instead."
       )
     )
   }
