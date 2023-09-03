@@ -15,25 +15,22 @@ coverage](https://codecov.io/gh/iancero/checkthat/branch/main/graph/badge.svg)](
 <!-- badges: end -->
 
 Most people regularly check that their data are still valid after any
-manipulation. For example, you might check, are there any impossible
-values in a newly created column? Does a dataframe have the correct
-number of columns and rows after a join? Is this column mistakenly a
-character vector when it should be a factor?
+manipulation and this process is critical to valid analysis results
+later on. Are there any impossible values in a newly created column?
+Does a dataframe have the correct number of columns and rows after a
+join?
 
-This process is critical to valid analysis results later on, but it
-often has a major pitfall: its usually conducted by hand or by eye. It
-therefore lives only in your head, and even then only for the brief
-period of time you are working on it. As soon as you move on to the next
-data analysis task, those thoughtful checks disappear into the ether. If
-something in your pipeline is later modified, how can you be sure
-everything that comes after that change remains valid?
+Despite its importance, the data checking process is usually conducted
+informally by hand or by eye - instead of in code (e.g., as in a unit
+test). If something in your pipeline is modified later, how can you be
+sure everything that comes after that change remains valid?
 
-**Checkthat**’s philosophy is that the checks you already perform on
-your data are good. But they would be even better if they lived in the
-code (in the form of data-based unit tests), rather than in your head.
-Checkthat therefore provides functions that closely resemble the checks
-you already do by hand or by eye, and makes it easy for you to also
-express them in code.
+The **checkthat** philosophy is that you already perform good data
+checks and you should keep doing it. But those checks would be even
+better if they lived in the code, rather than in your head. Checkthat
+therefore provides functions that closely resemble the checks you
+already do by hand or by eye, and makes it easy for you to also express
+them in code.
 
 ## Basic usage
 
@@ -76,11 +73,11 @@ mtcars |>
 #> ! At least one data check failed.
 ```
 
-Additionally, the `check_that()` functions is designed to work with both
+Additionally, the `check_that()` function is designed to work with both
 base R’s existing logical functions (e.g., `all()`, `any()`), as well
-it’s own set of “fuzzier” helper functions. Theses helper functions are
-designed to be both readable and to mirror in code what you already do
-manually by eye-balling a dataset.
+it’s own set of more flexible helper functions. Theses helper functions
+are designed to be both readable and to mirror in code what you already
+do manually by eye-balling a dataset.
 
 ``` r
 mtcars |>
@@ -94,41 +91,35 @@ mtcars |>
 
 ## Tidyverse pipelines
 
-The `check_that()` function always invisibly returns the same `.data` it
-received (always unmodified). This allows you to easily integrate it
+The `check_that()` function always invisibly returns the same `.data`
+you gave it (always unmodified). This allows you to easily integrate it
 directly into your data manipulation pipelines.
 
 ``` r
 new_mtcars <- mtcars |>
+  select(mpg) |>
   mutate(km_per_litre = 0.425 * mpg) |>
   check_that(max(km_per_litre) < 15)
 #> ✔ all data checks passing
 
 head(new_mtcars)
-#>                    mpg cyl disp  hp drat    wt  qsec vs am gear carb
-#> Mazda RX4         21.0   6  160 110 3.90 2.620 16.46  0  1    4    4
-#> Mazda RX4 Wag     21.0   6  160 110 3.90 2.875 17.02  0  1    4    4
-#> Datsun 710        22.8   4  108  93 3.85 2.320 18.61  1  1    4    1
-#> Hornet 4 Drive    21.4   6  258 110 3.08 3.215 19.44  1  0    3    1
-#> Hornet Sportabout 18.7   8  360 175 3.15 3.440 17.02  0  0    3    2
-#> Valiant           18.1   6  225 105 2.76 3.460 20.22  1  0    3    1
-#>                   km_per_litre
-#> Mazda RX4               8.9250
-#> Mazda RX4 Wag           8.9250
-#> Datsun 710              9.6900
-#> Hornet 4 Drive          9.0950
-#> Hornet Sportabout       7.9475
-#> Valiant                 7.6925
+#>                    mpg km_per_litre
+#> Mazda RX4         21.0       8.9250
+#> Mazda RX4 Wag     21.0       8.9250
+#> Datsun 710        22.8       9.6900
+#> Hornet 4 Drive    21.4       9.0950
+#> Hornet Sportabout 18.7       7.9475
+#> Valiant           18.1       7.6925
 ```
 
 ## Checking a pipeline at multiple points
 
-It is often easiest to place tests at the end of a pipeline, as above.
-However, `check_that()` can also be used at multiple points in a single
-pipeline to check that multi-step processes are unfolding according to
-plan. This can be especially important for data tasks that are sensitive
-to the order of operations, or for checks on intermediate data that wont
-be available at the end.
+Because it returns the same dataframe it received, `check_that()` can
+also be used at multiple points in a single pipeline. That way, you can
+check that multi-step processes are unfolding according to plan. This is
+be especially important for data tasks that are sensitive to the order
+of operations, or for checks on intermediate data that wont be available
+at the end.
 
 Consider a surprisingly tricky example. Imagine we wanted to (1) create
 a factor variable (`type`) designating cars as either small (`"sm"`) or
@@ -155,9 +146,7 @@ not have caught.
 ``` r
 mtcars |>
   mutate(type = factor(wt < 3, labels = c("sm", "lg"), ordered = TRUE)) |>
-  check_that(
-    max(wt[type == "sm"]) <= min(wt[type == "lg"])
-  ) |>
+  check_that(max(wt[type == "sm"]) <= min(wt[type == "lg"])) |>
   filter(type == "sm") |>
   summarise(desired_mpg = mean(mpg)) |>
   check_that(desired_mpg > 15)
@@ -182,15 +171,15 @@ Importantly, this mistake (a) would have given us an erroneously low
 `desired_mpg` and (b) would have gone undetected by our final
 `check_that(desired_mpg > 15)`. It was a call to `check_that()` earlier
 in the pipeline that caught the error and prevented us from drawing an
-erroneous conclusion about our data later on.
+bad conclusion about our data later on.
 
 ## Helper functions
 
-Checkthat’s philosophy is your existing data checks by eye are actually
-quite good. Their only major problem is that they live in your head and
-not in your code. So, checkthat provides a range of helper functions to
-work alongside base R’s existing collection (e.g., `all()`, `any()`).
-These include both some basic and “fuzzier” varieties.
+Checkthat’s philosophy is your existing data checks by eye are probably
+already good. Their only major problem is that they live in your head
+and not in your code. So, checkthat provides a range of helper functions
+to work alongside base R’s existing collection (e.g., `all()`, `any()`).
+These include both some basic and more flexible varieties.
 
 ### Basic helpers
 
@@ -211,19 +200,21 @@ mtcars |>
 #> ✔ all data checks passing
 ```
 
-### Fuzzy helpers
+### Flexible helpers
 
 The remaining helpers include `some_of()`, `whenever()`, and
-`for_case()`. Although they are not strictly “fuzzy” in the mathematical
-sense (or in the tactile sense), they’re optimized for the kind of
-semi-approximate data checking you are likely already doing by eye.
+`for_case()` and are more flexible than their basic counterparts.
+They’re optimized for the kind of semi-approximate data checking you are
+likely already doing by eye.
 
 For most people, this involves a general sense of what most of the data
 should look like most of the time, but not exact knowledge of specific
 proportions or counts. For example, you might have good reason to think
 `some_of()` the `cyl` values should be greater than 4, but you don’t
-know exactly how many. Instead, you know it should probably be
-`at_least` 30%, but `at_most` 25 total cases in your dataset.
+know exactly how many. However, you do know it should probably be
+`at_least` 30%, but `at_most` 25 total cases in your dataset. Anything
+outside that range would be implausible and so you want to guard it with
+`check_that()`.
 
 ``` r
 mtcars |>
@@ -236,7 +227,7 @@ mtcars |>
 ```
 
 Just like unit tests for production code, the tests created with these
-fuzzy helper functions will be technically imperfect and leave some
+flexible helper functions will be technically imperfect and leave some
 (possibly important) scenarios addressed. After all, there’s a big range
 of possibilities between `at_least = .30` and `at_most = 25`, and some
 of them might involve an undetected data problem.
@@ -250,9 +241,9 @@ easily write that test with a combination of `check_that()` and
 
 Moreover, a world of *no tests at all* is much worse than a world of
 *some tests that fail to cover every case*. With that in mind,
-checkthat’s fuzzy helper functions are designed to bring you from *not
-writing down any tests in your code* to *quickly and easily coding the
-tests you already do by eye*.
+checkthat’s flexible helper functions are designed to bring you from
+*not writing down any tests in your code* to *quickly and easily coding
+the tests you already do by eye*.
 
 ## Checking the whole dataframe
 
@@ -280,7 +271,7 @@ dimensions.
 
 ``` r
 mtcars |>
-  check_that(ncol(.d) == 11, nrow(.d) == 32) |>
+  check_that(ncol(.d) == 11, nrow(.d) == 32) |> # original dimensions
   pivot_longer(
     cols = everything(),
     names_to = "name",
