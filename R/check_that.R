@@ -1,3 +1,15 @@
+#' Title
+#'
+#' @param .data
+#' @param ...
+#' @param print
+#' @param raise_error
+#' @param encourage
+#'
+#' @return
+#' @export
+#'
+#' @examples
 check_that <- function(.data, ..., print = TRUE, raise_error = TRUE, encourage = TRUE){
 
   # TODO: add support for grouped data frames
