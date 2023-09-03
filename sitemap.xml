@@ -28,9 +28,39 @@
     <loc>https://iancero.github.io/checkthat/reference/at_least.html</loc>
   </url>
   <url>
+    <loc>https://iancero.github.io/checkthat/reference/at_most.html</loc>
+  </url>
+  <url>
+    <loc>https://iancero.github.io/checkthat/reference/check_that.html</loc>
+  </url>
+  <url>
+    <loc>https://iancero.github.io/checkthat/reference/checkthat-package.html</loc>
+  </url>
+  <url>
+    <loc>https://iancero.github.io/checkthat/reference/exactly_equal.html</loc>
+  </url>
+  <url>
+    <loc>https://iancero.github.io/checkthat/reference/for_case.html</loc>
+  </url>
+  <url>
     <loc>https://iancero.github.io/checkthat/reference/index.html</loc>
   </url>
   <url>
+    <loc>https://iancero.github.io/checkthat/reference/is_logical_vec.html</loc>
+  </url>
+  <url>
+    <loc>https://iancero.github.io/checkthat/reference/less_than.html</loc>
+  </url>
+  <url>
+    <loc>https://iancero.github.io/checkthat/reference/more_than.html</loc>
+  </url>
+  <url>
     <loc>https://iancero.github.io/checkthat/reference/prop.html</loc>
+  </url>
+  <url>
+    <loc>https://iancero.github.io/checkthat/reference/some_of.html</loc>
+  </url>
+  <url>
+    <loc>https://iancero.github.io/checkthat/reference/whenever.html</loc>
   </url>
 </urlset>
