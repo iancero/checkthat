@@ -16,8 +16,7 @@ Imports:
     glue (>= 1.6.2),
     lifecycle (>= 1.0.3),
     purrr (>= 1.0.2),
-    rlang (>= 1.1.1),
-    withr (>= 2.5.0)
+    rlang (>= 1.1.1)
 Suggests: 
     dplyr (>= 1.1.2),
     lubridate (>= 1.9.2),
