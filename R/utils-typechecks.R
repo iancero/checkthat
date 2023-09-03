@@ -1,9 +1,9 @@
 is_integerlike <- function(x) {
-  if (!is.numeric(x)){
+  if (!is.numeric(x)) {
     return(FALSE)
   }
 
-  if (length(x) != 1){
+  if (length(x) != 1) {
     return(FALSE)
   }
 
@@ -11,44 +11,45 @@ is_integerlike <- function(x) {
 }
 
 is_proportion <- function(x) {
-  if (!is.numeric(x)){
+  if (!is.numeric(x)) {
     return(FALSE)
   }
 
-  if (length(x) != 1){
+  if (length(x) != 1) {
     return(FALSE)
   }
 
   (x >= 0) & (x <= 1)
 }
 
-validate_proportion <- function(x){
-  if(!is_proportion(x)){
-    stop('Not a valid proportion')
+validate_proportion <- function(x) {
+  if (!is_proportion(x)) {
+    stop("Not a valid proportion")
   }
 
   TRUE
 }
 
 is_count <- function(x, include_zero = TRUE) {
-  if (!is_integerlike(x)){
+  if (!is_integerlike(x)) {
     return(FALSE)
   }
 
-  if (!include_zero){
+  if (!include_zero) {
     return(x > 0)
   }
 
   x >= 0
 }
 
-validate_count <- function(x, include_zero = TRUE){
-  if(!is_count(x, include_zero = include_zero)){
-    stop('Not a valid count value (i.e., integer of zero or greater).')
+validate_count <- function(x, include_zero = TRUE) {
+  if (!is_count(x, include_zero = include_zero)) {
+    stop("Not a valid count value (i.e., integer of zero or greater).")
   }
 
   TRUE
 }
+
 
 validate_logical_vec <- function(logical_vec) {
   if (length(logical_vec) < 1) {
@@ -65,4 +66,3 @@ validate_logical_vec <- function(logical_vec) {
 
   TRUE
 }
-
