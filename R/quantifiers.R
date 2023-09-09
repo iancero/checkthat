@@ -295,6 +295,7 @@ some_of <- function(logical_vec, ...) {
 #' @examples
 whenever <- function(is_observed, then_expect, ...) {
   validate_logical_vec(is_observed)
+  validate_logical_vec(then_expect)
 
   logical_vec <- then_expect[is_observed]
 
