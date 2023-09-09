@@ -37,7 +37,7 @@ particularly useful for quality control and data validation.
 \details{
 The \code{check_that()} function is designed to work with both base R's
 existing logical functions, as well as several new functions provided in the
-checkthat package.
+checkthat package (see See Also below).
 
 In addition, it also provides a data pronoun, \code{.d}. This is a copy of
 the \code{.data} dataframe provided as the first argument and is useful for
