@@ -384,5 +384,109 @@ test_that("some_of throws error for negative values", {
   expect_error(some_of(logical_vec, at_least = -3))
 })
 
+test_that("whenever correctly evaluates when is_observed and then_expect are both TRUE", {
+  is_observed <- c(TRUE, FALSE, TRUE, TRUE, FALSE)
+  then_expect <- c(TRUE, FALSE, TRUE, TRUE, FALSE)
 
+  result <- whenever(is_observed, then_expect)
+  expect_true(result)
+})
 
+test_that("whenever correctly evaluates when is_observed is TRUE and then_expect is FALSE", {
+  is_observed <- c(TRUE, FALSE, TRUE, TRUE, FALSE)
+  then_expect <- c(TRUE, FALSE, FALSE, TRUE, FALSE)
+
+  result <- whenever(is_observed, then_expect)
+  expect_false(result)
+})
+
+test_that("whenever correctly evaluates when is_observed is FALSE and then_expect is TRUE", {
+  is_observed <- c(TRUE, FALSE, TRUE, TRUE, FALSE)
+  then_expect <- c(FALSE, FALSE, TRUE, TRUE, TRUE)
+
+  # Test that whenever correctly evaluates when is_observed is FALSE and then_expect is TRUE
+  result <- whenever(is_observed, then_expect)
+  expect_false(result)
+})
+
+test_that("whenever correctly evaluates when at_least condition is met", {
+  is_observed <- c(TRUE, FALSE, TRUE, TRUE, FALSE)
+  then_expect <- c(TRUE, FALSE, TRUE, TRUE, TRUE)
+
+  # Test that whenever correctly evaluates when at_least condition is met
+  result <- whenever(is_observed, then_expect, at_least = 3)
+  expect_true(result)
+
+  result <- whenever(is_observed, then_expect, at_least = 4)
+  expect_false(result)
+})
+
+test_that("whenever correctly evaluates when at_most condition is met", {
+  is_observed <- c(TRUE, FALSE, TRUE, TRUE, TRUE)
+  then_expect <- c(TRUE, FALSE, TRUE, TRUE, TRUE)
+
+  result <- whenever(is_observed, then_expect, at_most = 4)
+  expect_true(result)
+
+  result <- whenever(is_observed, then_expect, at_most = 3)
+  expect_false(result)
+})
+
+test_that("whenever correctly evaluates when both at_least and at_most conditions are met", {
+  is_observed <- c(TRUE, FALSE, TRUE, TRUE, FALSE)
+  then_expect <- c(TRUE, FALSE, TRUE, TRUE, TRUE)
+
+  result <- whenever(is_observed, then_expect, at_least = 2, at_most = 4)
+  expect_true(result)
+
+  result <- whenever(is_observed, then_expect, at_least = 2, at_most = 2)
+  expect_false(result)
+})
+
+test_that("whenever throws error for non-logical input in is_observed", {
+  is_observed <- c(TRUE, FALSE, TRUE, 'string', FALSE)
+  then_expect <- c(TRUE, FALSE, TRUE, TRUE, TRUE)
+
+  expect_error(whenever(is_observed, then_expect))
+})
+
+test_that("whenever throws error for non-logical input in then_expect", {
+  is_observed <- c(TRUE, FALSE, TRUE, TRUE, FALSE)
+  then_expect <- c(TRUE, FALSE, TRUE, "string", TRUE)
+
+  expect_error(whenever(is_observed, then_expect))
+})
+
+test_that("whenever correctly evaluates at_least as proportion", {
+  is_observed <- c(TRUE, FALSE, TRUE, TRUE, FALSE)
+  then_expect <- c(TRUE, FALSE, TRUE, FALSE, TRUE)
+
+  # Test that whenever correctly evaluates at_least as a proportion
+  result <- whenever(is_observed, then_expect, at_least = 0.6)
+  expect_true(result)
+
+  # Test that whenever correctly evaluates at_least as a proportion with rounding
+  result <- whenever(is_observed, then_expect, at_least = 0.7)
+  expect_false(result)
+})
+
+test_that("whenever correctly evaluates at_most as proportion", {
+  is_observed <- c(TRUE, FALSE, TRUE, TRUE, FALSE)
+  then_expect <- c(TRUE, FALSE, TRUE, TRUE, TRUE)
+
+  # Test that whenever correctly evaluates at_most as a proportion
+  result <- whenever(is_observed, then_expect, at_least = 0.5)
+  expect_true(result)
+
+  # Test that whenever correctly evaluates at_most as a proportion with rounding
+  result <- whenever(is_observed, then_expect, at_most = 0.3)
+  expect_false(result)
+})
+
+test_that("whenever throws error for at_least = 1", {
+  is_observed <- c(TRUE, FALSE, TRUE, TRUE, FALSE)
+  then_expect <- c(TRUE, FALSE, TRUE, TRUE, TRUE)
+
+  # Test that whenever throws an error for at_least = 1
+  expect_error(whenever(is_observed, then_expect, at_least = 1))
+})
