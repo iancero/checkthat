@@ -490,3 +490,38 @@ test_that("whenever throws error for at_least = 1", {
   # Test that whenever throws an error for at_least = 1
   expect_error(whenever(is_observed, then_expect, at_least = 1))
 })
+
+test_that("for_case correctly resolves to TRUE when all logical vectors have TRUE at case", {
+  case <- 2
+  logical_vec1 <- c(FALSE, TRUE, FALSE, TRUE, FALSE)
+  logical_vec2 <- c(TRUE, TRUE, TRUE, TRUE, TRUE)
+
+  result <- for_case(case, logical_vec1, logical_vec2)
+  expect_true(result)
+})
+
+test_that("for_case correctly receives valid logical vector (for case arg) with only 1 TRUE value", {
+  case <- c(FALSE, TRUE, FALSE, FALSE, FALSE)
+  logical_vec1 <- c(FALSE, TRUE, FALSE, TRUE, FALSE)
+  logical_vec2 <- c(TRUE, TRUE, TRUE, TRUE, TRUE)
+
+  result <- for_case(case, logical_vec1, logical_vec2)
+  expect_true(result)
+})
+
+test_that("for_case correctly throws error for  invalid logical vector (for case arg) with > 1 TRUE value", {
+  case <- c(FALSE, TRUE, FALSE, TRUE, FALSE)
+  logical_vec1 <- c(FALSE, TRUE, FALSE, TRUE, FALSE)
+  logical_vec2 <- c(TRUE, TRUE, TRUE, TRUE, TRUE)
+
+  expect_error(for_case(case, logical_vec1, logical_vec2))
+})
+
+test_that("for_case correctly resolves to FALSE when at least one logical vector has FALSE at case", {
+  case <- 3
+  logical_vec1 <- c(FALSE, TRUE, TRUE, TRUE, FALSE)
+  logical_vec2 <- c(TRUE, TRUE, FALSE, TRUE, TRUE)
+
+  result <- for_case(case, logical_vec1, logical_vec2)
+  expect_false(result)
+})
