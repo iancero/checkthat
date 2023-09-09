@@ -273,3 +273,116 @@ test_that("exactly_equal works correctly with count", {
   expect_true(result)
 })
 
+test_that("some_of throws error for empty ... argument", {
+  logical_vec <- c(TRUE, FALSE, TRUE)
+
+  # Test that some_of throws an error when ... is empty
+  expect_error(some_of(logical_vec))
+})
+
+test_that("some_of throws error for unnamed arguments", {
+  logical_vec <- c(TRUE, FALSE, TRUE)
+
+  # Test that some_of throws an error when arguments are not named
+  expect_error(some_of(logical_vec, TRUE, FALSE, at_least = 2))
+})
+
+test_that("some_of handles single quantifier argument correctly", {
+  logical_vec <- c(TRUE, FALSE, TRUE)
+
+  # Test that some_of correctly handles a single quantifier argument
+  result <- some_of(logical_vec, at_least = 2)
+  expect_true(result)
+})
+
+test_that("some_of handles multiple quantifier arguments correctly", {
+  logical_vec <- c(TRUE, FALSE, TRUE)
+
+  # Test that some_of correctly handles multiple quantifier arguments
+  result <- some_of(logical_vec, at_least = 2, less_than = 3)
+  expect_true(result)
+})
+
+test_that("some_of handles complex conditions correctly", {
+  logical_vec <- c(TRUE, FALSE, TRUE, TRUE)
+
+  # Test that some_of correctly handles complex conditions
+  result <- some_of(logical_vec, at_least = 2, at_most = 3)
+  expect_true(result)
+})
+
+test_that("some_of throws error for non-logical input", {
+  logical_vec <- c(TRUE, FALSE, TRUE)
+
+  # Test that some_of throws an error for non-logical input
+  expect_error(some_of(logical_vec, 2 > 1))
+})
+
+test_that("some_of fails when at_least = 1", {
+  logical_vec <- c(TRUE, FALSE, TRUE)
+
+  # Test that some_of fails when at_least = 1
+  expect_error(some_of(logical_vec, at_least = 1))
+})
+
+test_that("some_of handles empty input vector", {
+  logical_vec <- logical(0)
+  expect_error(some_of(logical_vec, at_least = 2))
+})
+
+test_that("some_of handles all FALSE values", {
+  logical_vec <- c(FALSE, FALSE, FALSE)
+  result <- some_of(logical_vec, at_least = 2)
+  expect_false(result)
+})
+
+test_that("some_of handles zero quantifiers", {
+  logical_vec <- c(TRUE, FALSE, TRUE)
+  expect_error(some_of(logical_vec))
+})
+
+test_that("some_of handles mixed quantifiers", {
+  logical_vec <- c(TRUE, FALSE, TRUE, TRUE)
+  result <- some_of(logical_vec, at_least = 2, at_most = 3, less_than = 4)
+  expect_true(result)
+})
+
+test_that("some_of handles non-numeric quantifiers", {
+  logical_vec <- c(TRUE, FALSE, TRUE, TRUE)
+  expect_error(some_of(logical_vec, at_least = "a", at_most = "b"))
+})
+
+test_that("some_of handles a large input vector", {
+  logical_vec <- rep(TRUE, 1000)
+  result <- some_of(logical_vec, at_least = 1000)
+  expect_true(result)
+})
+
+test_that("some_of handles proportions for at_least correctly", {
+  logical_vec <- c(TRUE, FALSE, TRUE, TRUE, FALSE)
+
+  # Test that some_of correctly handles at_least as a proportion
+  result <- some_of(logical_vec, at_least = 0.4)
+  expect_true(result)
+
+  # Test that some_of correctly handles at_least as a proportion
+  result <- some_of(logical_vec, at_least = 0.6)
+  expect_true(result)
+
+  # Test that some_of correctly handles at_least as a proportion with rounding
+  result <- some_of(logical_vec, at_least = 0.9)
+  expect_false(result)
+})
+
+test_that("some_of throws error for non-integer / non-prop values", {
+  logical_vec <- c(TRUE, FALSE, TRUE)
+  expect_error(some_of(logical_vec, at_least = 1.2))
+})
+
+test_that("some_of throws error for negative values", {
+  logical_vec <- c(TRUE, FALSE, TRUE)
+  expect_error(some_of(logical_vec, at_least = -3))
+})
+
+
+
