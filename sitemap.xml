@@ -46,7 +46,16 @@
     <loc>https://iancero.github.io/checkthat/reference/index.html</loc>
   </url>
   <url>
+    <loc>https://iancero.github.io/checkthat/reference/is_count.html</loc>
+  </url>
+  <url>
+    <loc>https://iancero.github.io/checkthat/reference/is_integerlike.html</loc>
+  </url>
+  <url>
     <loc>https://iancero.github.io/checkthat/reference/is_logical_vec.html</loc>
+  </url>
+  <url>
+    <loc>https://iancero.github.io/checkthat/reference/is_proportion.html</loc>
   </url>
   <url>
     <loc>https://iancero.github.io/checkthat/reference/less_than.html</loc>
@@ -59,6 +68,15 @@
   </url>
   <url>
     <loc>https://iancero.github.io/checkthat/reference/some_of.html</loc>
+  </url>
+  <url>
+    <loc>https://iancero.github.io/checkthat/reference/validate_count.html</loc>
+  </url>
+  <url>
+    <loc>https://iancero.github.io/checkthat/reference/validate_logical_vec.html</loc>
+  </url>
+  <url>
+    <loc>https://iancero.github.io/checkthat/reference/validate_proportion.html</loc>
   </url>
   <url>
     <loc>https://iancero.github.io/checkthat/reference/whenever.html</loc>
