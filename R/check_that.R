@@ -39,7 +39,7 @@
 #' # Test a dataframe for specific conditions
 #' example_data |>
 #'   check_that(
-#'     all(x > 0)
+#'     all(x > 0),
 #'     !any(y < 5)
 #'   )
 #'
