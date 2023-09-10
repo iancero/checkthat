@@ -10,11 +10,12 @@ validate_proportion(x)
 \item{x}{Numeric value to validate as a proportion.}
 }
 \value{
-\code{TRUE} if \code{x} is a valid proportion, otherwise it throws an error.
+\code{TRUE} if \code{x} is a valid proportion, otherwise it throws
+an error.
 }
 \description{
 This function validates whether a numeric value is a valid proportion scalar
-(within \link{0, 1}).
+(ranging from 0 to 1, inclusive).
 }
 \examples{
 validate_proportion(0.5)   # TRUE
