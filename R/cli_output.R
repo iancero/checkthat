@@ -4,6 +4,7 @@
 #' customizes the Command Line Interface (CLI) theme for messages displayed
 #' by the checkthat package.
 #'
+#' @keywords internal
 #' @noRd
 #'
 #' @returns A customized CLI theme for checkthat messages.
@@ -22,6 +23,7 @@ checkthat_cli_theme <- function() {
 #' This is an internal function that is not intended for external use.
 #' It retrieves a random encouraging message from a predefined list of messages.
 #'
+#' @keywords internal
 #' @noRd
 #'
 #' @returns A randomly selected string containing an encouraging message.
@@ -53,6 +55,7 @@ encouraging_message <- function() {
 #' displays a success message in the Command Line Interface (CLI) using the
 #' customized checkthat theme.
 #'
+#' @keywords internal
 #' @noRd
 cli_check_success <- function() {
   cli::start_app(theme = checkthat_cli_theme())
@@ -68,6 +71,7 @@ cli_check_success <- function() {
 #' @param msg A custom message to display. If not provided, a random encouraging message will be selected.
 #' @param p The probability of displaying the message. Default is 0.33.
 #'
+#' @keywords internal
 #' @noRd
 #'
 #' @returns (invisibly) The unmodifiied \code{msg} string from above.
@@ -87,6 +91,7 @@ cli_add_encouragement <- function(msg = encouraging_message(), p = .33) {
 #' triggers a test error message in the Command Line Interface (CLI) using the
 #' customized checkthat theme.
 #'
+#' @keywords internal
 #' @noRd
 cli_throw_test_error <- function() {
   cli::start_app(theme = checkthat_cli_theme())
@@ -104,6 +109,7 @@ cli_throw_test_error <- function() {
 #' @param test_results A logical vector representing the results of data checks.
 #' @param test_labs A character vector containing labels for the data checks.
 #'
+#' @keywords internal
 #' @noRd
 #'
 #' @returns (invisibly) A named character vector of check results.
@@ -145,6 +151,7 @@ cli_check_summary <- function(test_results, test_labs) {
 #' @param encourage Logical. If \code{TRUE}, encouraging messages will be
 #'                  displayed when tests pass.
 #'
+#' @keywords internal
 #' @noRd
 cli_print_checks <- function(test_results, test_labs, encourage = TRUE) {
   if (all(test_results) == TRUE) {
