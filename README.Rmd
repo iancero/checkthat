@@ -27,11 +27,11 @@ library(tidyverse)
 [![Codecov test coverage](https://codecov.io/gh/iancero/checkthat/branch/main/graph/badge.svg)](https://app.codecov.io/gh/iancero/checkthat?branch=main)
 <!-- badges: end -->
 
-Most people regularly check that their data are still valid after any manipulation and this process is critical to valid analysis results later on. Are there any impossible values in a newly created column? Does a dataframe have the correct number of columns and rows after a join? 
+Most people regularly check that their data are valid after a manipulation. This process is critical to valid analysis results later on. Are there any impossible values in a newly created column? Does a dataframe have the correct number of columns and rows after a join? 
 
 Despite its importance, the data checking process is usually conducted informally by hand or by eye - instead of in code (e.g., as in a unit test). If something in your pipeline is modified later, how can you be sure everything that comes after that change remains valid? 
 
-The **checkthat** philosophy is that you already perform good data checks and you should keep doing it. But those checks would be even better if they lived in the code, rather than in your head. Checkthat therefore provides functions that closely resemble the checks you already do by hand or by eye, and makes it easy for you to also express them in code.
+The **checkthat** philosophy is that you already perform good data checks and you should keep doing it. But those checks would be even better if they lived in the code, rather than in your head. Checkthat therefore provides functions that closely resemble the checks you already do by hand or by eye, so that it is easy for you to also express them in code as you go.
 
 ## Basic usage 
 
@@ -63,7 +63,7 @@ mtcars |>
   )
 ```
 
-Additionally, the `check_that()` function is designed to work with both base R's existing logical functions (e.g., `all()`, `any()`), as well it's own set of more flexible helper functions. Theses helper functions are designed to be both readable and to mirror in code what you already do manually by eye-balling a dataset.
+The `check_that()` function is designed to work with both base R's existing logical functions (e.g., `all()`, `any()`), as well it's own set of more flexible helper functions. Theses helper functions are designed to be both readable and to mirror in code what you already do manually by eye-balling a dataset.
 
 ```{r}
 mtcars |>
@@ -202,3 +202,5 @@ There are two pre-existing packages that served as inspiration for checkthat. Th
 - [**testthat**](https://testthat.r-lib.org/) implements **unit testing for packages** and is currently the most popular testing package for R. If your goal is to develop a package - rather than conduct a data analysis - then testthat will be a much better choice than checkthat.
 
 - [**testdat**](https://socialresearchcentre.github.io/testdat/index.html) is inspired by testhat and - like checkthat - also implements **unit testing for data**. It is different from checkthat in two ways. First, it is a more mature package than checkthat, and is therefore potentially more stable in the near term. Second, whereas checkthat is designed to directly embed your tests into data manipulation pipelines, testdat is designed to place tests in separate code blocks or even files.
+
+- [**validate**](https://github.com/data-cleaning/validate) is another well-developed and popular data checking package. It can work is ways that are similar to checkthat (and it also has its own analogous `check_that()` function). However, the validate package is primarily dedicated to specifying your data validation rules in advance, rather than the on-the-fly approach for checkthat. This is ideal when you want your validation rules to be repeatable. For example, you might want `Sepal.Width < 0.5*Sepal.Length` to always be `TRUE`, no matter where you are in the analysis. In contrast, f you want simple checks that you write concurrently with the data manipulation code itself, then you might prefer checkthat.
