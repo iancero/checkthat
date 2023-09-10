@@ -23,9 +23,8 @@ Validates a logical vector to ensure it meets specific criteria:
 }
 \examples{
 validate_logical_vec(c(TRUE, FALSE, TRUE)) # TRUE
-validate_logical_vec(c()) # Error: logical_vec must have length of at least 1
-validate_logical_vec(c(NA, NA)) # Warning: All values of logical_vec are NA
-
+try(validate_logical_vec(c())) # Error
+validate_logical_vec(c(NA, NA)) # Warning
 }
 \seealso{
 \code{\link{is_proportion}}, \code{\link{is_count}},

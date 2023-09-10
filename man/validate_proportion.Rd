@@ -19,8 +19,7 @@ This function validates whether a numeric value is a valid proportion scalar
 }
 \examples{
 validate_proportion(0.5)   # TRUE
-validate_proportion(1.2)   # Error: Not a valid proportion
-
+try(validate_proportion(1.2))   # Error
 }
 \seealso{
 \code{\link{is_proportion}}, \code{\link{is_count}},
