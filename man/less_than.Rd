@@ -16,10 +16,12 @@ less_than(logical_vec, p = NULL, n = NULL, na.rm = FALSE)
 \item{na.rm}{Logical. Should missing values be removed before calculation?}
 }
 \value{
-\code{TRUE} if the condition is met for less than the specified proportion or count, otherwise \code{FALSE}.
+\code{TRUE} if the condition is met for less than the specified
+proportion or count, otherwise \code{FALSE}.
 }
 \description{
-This function facilitates a comparison to check if less than a specified proportion or count of values in a logical vector
+This function facilitates a comparison to check if less than a specified
+proportion or count of values in a logical vector
 evaluate to \code{TRUE}.
 }
 \examples{
@@ -28,6 +30,8 @@ less_than(c(TRUE, FALSE, FALSE), p = 0.1)  # Returns FALSE
 
 }
 \seealso{
+\link{\code{check_that}}
+
 Other basic_quantifiers: 
 \code{\link{at_least}()},
 \code{\link{at_most}()},

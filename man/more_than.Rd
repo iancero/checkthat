@@ -16,11 +16,12 @@ more_than(logical_vec, p = NULL, n = NULL, na.rm = FALSE)
 \item{na.rm}{Logical. Should missing values be removed before calculation?}
 }
 \value{
-\code{TRUE} if the condition is met for more than the specified proportion or count, otherwise \code{FALSE}.
+\code{TRUE} if the condition is met for more than the specified
+proportion or count, otherwise \code{FALSE}.
 }
 \description{
-This function facilitates a comparison to check if more than a specified proportion or count of values in a logical vector
-evaluate to \code{TRUE}.
+This function facilitates a comparison to check if more than a specified
+proportion or count of values in a logical vector evaluate to \code{TRUE}.
 }
 \examples{
 # Check if more than 70\% of values are TRUE

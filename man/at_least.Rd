@@ -16,11 +16,12 @@ at_least(logical_vec, p = NULL, n = NULL, na.rm = FALSE)
 \item{na.rm}{Logical. Should missing values be removed before calculation?}
 }
 \value{
-\code{TRUE} if the condition is met for at least the specified proportion or count, otherwise \code{FALSE}.
+\code{TRUE} if the condition is met for at least the specified
+proportion or count, otherwise \code{FALSE}.
 }
 \description{
-This function facilitates a comparison to check if at least a specified proportion or count of values in a logical vector
-evaluate to \code{TRUE}.
+This function facilitates a comparison to check if at least a specified
+proportion or count of values in a logical vector evaluate to \code{TRUE}.
 }
 \examples{
 # Check if at least 50\% of values are TRUE

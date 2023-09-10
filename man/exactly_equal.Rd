@@ -16,11 +16,12 @@ exactly_equal(logical_vec, p = NULL, n = NULL, na.rm = FALSE)
 \item{na.rm}{Logical. Should missing values be removed before calculation?}
 }
 \value{
-\code{TRUE} if the proportion or count of values is exactly equal to the specified value, otherwise \code{FALSE}.
+\code{TRUE} if the proportion or count of values is exactly equal to
+the specified value, otherwise \code{FALSE}.
 }
 \description{
-This function facilitates a comparison to check if the proportion or count of values in a logical vector is exactly equal
-to a specified value.
+This function facilitates a comparison to check if the proportion or count
+of values in a logical vector is exactly equal to a specified value.
 }
 \examples{
 # Check if all values are TRUE
