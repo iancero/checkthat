@@ -1,6 +1,5 @@
 test_that("checkthat_cli_theme returns a modified CLI theme", {
-  variables <- c("h1", ".alert-success", ".alert-danger", "body")
-  theme <- checkthat_cli_theme(variables)
+  theme <- checkthat_cli_theme()
 
   expect_equal(theme[["h1"]][["color"]], "grey40")
   expect_equal(theme[[".alert-success"]][["color"]], "grey40")
@@ -28,4 +27,18 @@ test_that("encouraging_message returns a message from the list", {
   message <- encouraging_message()
 
   expect_true(message %in% encouraging_messages)
+})
+
+cli::test_that_cli("success", {
+  testthat::local_edition(3)
+  testthat::expect_snapshot({
+    cli::cli_alert_success("wow")
+  })
+})
+
+cli::test_that_cli("success", {
+  testthat::local_edition(3)
+  testthat::expect_snapshot({
+    cli_check_success()
+  })
 })
