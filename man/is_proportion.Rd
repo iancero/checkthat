@@ -20,7 +20,6 @@ is numeric and within the range of 0 to 1 (inclusive).
 is_proportion(0.5)  # TRUE
 is_proportion(1.2)  # FALSE
 is_proportion(-0.2) # FALSE
-
 }
 \seealso{
 \code{\link{is_integerlike}}, \code{\link{is_count}},

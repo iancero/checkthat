@@ -21,7 +21,6 @@ is_integerlike(3)      # TRUE
 is_integerlike(3.5)    # FALSE
 is_integerlike("3")    # FALSE
 is_integerlike(c(1,2)) # FALSE
-
 }
 \seealso{
 \code{\link{is_proportion}}, \code{\link{is_count}},

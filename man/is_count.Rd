@@ -24,7 +24,6 @@ is_count(3)   # TRUE
 is_count(0, include_zero = FALSE) # FALSE
 is_count(-1)  # FALSE
 is_count(1.5) # FALSE
-
 }
 \seealso{
 \code{\link{is_proportion}}, \code{\link{is_integerlike}},
