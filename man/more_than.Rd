@@ -28,10 +28,10 @@ more_than(c(TRUE, TRUE, FALSE, TRUE), p = 0.7)  # Returns TRUE
 
 }
 \seealso{
-Other quantifiers: 
+Other basic_quantifiers: 
 \code{\link{at_least}()},
 \code{\link{at_most}()},
 \code{\link{exactly_equal}()},
 \code{\link{less_than}()}
 }
-\concept{quantifiers}
+\concept{basic_quantifiers}

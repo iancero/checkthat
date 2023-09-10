@@ -356,7 +356,7 @@ for_case <- function(case, ...) {
 #' # Check if at least 50% of values are TRUE
 #' at_least(c(TRUE, TRUE, FALSE), p = 0.5) # Returns TRUE
 #'
-#' @family quantifiers
+#' @family basic_quantifiers
 #'
 #' @export
 at_least <- function(logical_vec, p = NULL, n = NULL, na.rm = FALSE) {
@@ -378,7 +378,7 @@ at_least <- function(logical_vec, p = NULL, n = NULL, na.rm = FALSE) {
 #' # Check if more than 70% of values are TRUE
 #' more_than(c(TRUE, TRUE, FALSE, TRUE), p = 0.7)  # Returns TRUE
 #'
-#' @family quantifiers
+#' @family basic_quantifiers
 #'
 #' @export
 more_than <- function(logical_vec, p = NULL, n = NULL, na.rm = FALSE) {
@@ -400,7 +400,7 @@ more_than <- function(logical_vec, p = NULL, n = NULL, na.rm = FALSE) {
 #' # Check if at most 20% of values are TRUE
 #' at_most(c(TRUE, FALSE, TRUE, TRUE), p = 0.2)  # Returns TRUE
 #'
-#' @family quantifiers
+#' @family basic_quantifiers
 #'
 #' @export
 at_most <- function(logical_vec, p = NULL, n = NULL, na.rm = FALSE) {
@@ -422,7 +422,7 @@ at_most <- function(logical_vec, p = NULL, n = NULL, na.rm = FALSE) {
 #' # Check if less than 10% of values are TRUE
 #' less_than(c(TRUE, FALSE, FALSE), p = 0.1)  # Returns FALSE
 #'
-#' @family quantifiers
+#' @family basic_quantifiers
 #'
 #' @export
 less_than <- function(logical_vec, p = NULL, n = NULL, na.rm = FALSE) {
@@ -444,7 +444,7 @@ less_than <- function(logical_vec, p = NULL, n = NULL, na.rm = FALSE) {
 #' # Check if all values are TRUE
 #' exactly_equal(c(TRUE, TRUE, TRUE), p = 1.0)  # Returns TRUE
 #'
-#' @family quantifiers
+#' @family basic_quantifiers
 #'
 #' @export
 exactly_equal <- function(logical_vec, p = NULL, n = NULL, na.rm = FALSE) {

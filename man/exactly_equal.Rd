@@ -28,10 +28,10 @@ exactly_equal(c(TRUE, TRUE, TRUE), p = 1.0)  # Returns TRUE
 
 }
 \seealso{
-Other quantifiers: 
+Other basic_quantifiers: 
 \code{\link{at_least}()},
 \code{\link{at_most}()},
 \code{\link{less_than}()},
 \code{\link{more_than}()}
 }
-\concept{quantifiers}
+\concept{basic_quantifiers}
