@@ -2,13 +2,54 @@
 % Please edit documentation in R/quantifiers.R
 \name{for_case}
 \alias{for_case}
-\title{Title}
+\title{Check if Logical Conditions Hold for a Specific Data Row}
 \usage{
 for_case(case, ...)
 }
 \arguments{
-\item{...}{}
+\item{case}{A row number or a logical vector identifying the specific data
+row(s) to check. If a logical vector, it must have exactly 1 TRUE element
+(i.e., that can be used to infer the row of interest).}
+
+\item{...}{A set of logical conditions to be checked.}
+}
+\value{
+A logical value indicating whether ALL specified conditions hold
+true for the specified data row (i.e., \code{case}).
 }
 \description{
-Title
+Designed as a helper function for \code{check_that()}, this function checks
+whether user-supplied logical conditions hold true for a specific data row.
 }
+\details{
+This function is useful for checking if certain logical conditions are met
+for a specific data row in your dataset. You can provide one or more logical
+conditions as arguments, and the function will evaluate them for the
+specified row.
+
+If you provide a row number (\code{case}), the function will check the
+conditions for that specific row. If \code{case} is a logical vector, it
+will check the conditions for rows where \code{case} is TRUE. Note, when
+\code{case} is a logical vector, it must have exactly one TRUE element that
+can then be used to infer the row of interest. Internally, this is done with
+a call to \code{which()}.
+
+If the specified \code{case} is not a valid count (i.e., a row number) or
+does not satisfy the condition \code{length(which(case)) == 1}, the function
+will throw an error.
+}
+\examples{
+# for_case is designed primarily as a helper function for check_that
+sample_data <- data.frame(id = c(11, 22, 33), group = c("A", "B", "C"))
+
+sample_data |>
+  check_that(
+    for_case(2, group == "B"), # case given as number
+    for_case(id == 22, group == "B") # case given as logical vector
+  )
+
+# for_case will technically work with simple vectors too
+backwards_letters <- rev(letters)
+for_case(3, backwards_letters == "x") # TRUE
+}
+\concept{special_quantifiers}

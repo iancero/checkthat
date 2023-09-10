@@ -308,15 +308,51 @@ whenever <- function(is_observed, then_expect, ...) {
 }
 
 
-#' Title
+#' Check if Logical Conditions Hold for a Specific Data Row
 #'
-#' @param case
-#' @param ...
+#' Designed as a helper function for \code{check_that()}, this function checks
+#' whether user-supplied logical conditions hold true for a specific data row.
 #'
-#' @return
-#' @export
+#' @param case A row number or a logical vector identifying the specific data
+#'    row(s) to check. If a logical vector, it must have exactly 1 TRUE element
+#'    (i.e., that can be used to infer the row of interest).
+#' @param ... A set of logical conditions to be checked.
+#' @return A logical value indicating whether ALL specified conditions hold
+#'    true for the specified data row (i.e., \code{case}).
+#'
+#' @details
+#' This function is useful for checking if certain logical conditions are met
+#' for a specific data row in your dataset. You can provide one or more logical
+#' conditions as arguments, and the function will evaluate them for the
+#' specified row.
+#'
+#' If you provide a row number (\code{case}), the function will check the
+#' conditions for that specific row. If \code{case} is a logical vector, it
+#' will check the conditions for rows where \code{case} is TRUE. Note, when
+#' \code{case} is a logical vector, it must have exactly one TRUE element that
+#' can then be used to infer the row of interest. Internally, this is done with
+#' a call to \code{which()}.
+#'
+#' If the specified \code{case} is not a valid count (i.e., a row number) or
+#' does not satisfy the condition \code{length(which(case)) == 1}, the function
+#' will throw an error.
+#'
+#' @family special_quantifiers
 #'
 #' @examples
+#' # for_case is designed primarily as a helper function for check_that
+#' sample_data <- data.frame(id = c(11, 22, 33), group = c("A", "B", "C"))
+#'
+#' sample_data |>
+#'   check_that(
+#'     for_case(2, group == "B"), # case given as number
+#'     for_case(id == 22, group == "B") # case given as logical vector
+#'   )
+#'
+#' # for_case will technically work with simple vectors too
+#' backwards_letters <- rev(letters)
+#' for_case(3, backwards_letters == "x") # TRUE
+#' @export
 for_case <- function(case, ...) {
   dots <- rlang::list2(...)
 
@@ -343,15 +379,16 @@ for_case <- function(case, ...) {
 
 #' Facilitate "At Least" Comparison on Logical Vectors
 #'
-#' This function facilitates a comparison to check if at least a specified proportion or count of values in a logical vector
-#' evaluate to \code{TRUE}.
+#' This function facilitates a comparison to check if at least a specified
+#' proportion or count of values in a logical vector evaluate to \code{TRUE}.
 #'
 #' @param logical_vec A logical vector.
 #' @param p Proportion value (0 to 1) to compare against.
 #' @param n Count value (integer) to compare against.
 #' @param na.rm Logical. Should missing values be removed before calculation?
 #'
-#' @return \code{TRUE} if the condition is met for at least the specified proportion or count, otherwise \code{FALSE}.
+#' @return \code{TRUE} if the condition is met for at least the specified
+#'    proportion or count, otherwise \code{FALSE}.
 #' @examples
 #' # Check if at least 50% of values are TRUE
 #' at_least(c(TRUE, TRUE, FALSE), p = 0.5) # Returns TRUE
@@ -365,15 +402,16 @@ at_least <- function(logical_vec, p = NULL, n = NULL, na.rm = FALSE) {
 
 #' Facilitate "More Than" Comparison on Logical Vectors
 #'
-#' This function facilitates a comparison to check if more than a specified proportion or count of values in a logical vector
-#' evaluate to \code{TRUE}.
+#' This function facilitates a comparison to check if more than a specified
+#' proportion or count of values in a logical vector evaluate to \code{TRUE}.
 #'
 #' @param logical_vec A logical vector.
 #' @param p Proportion value (0 to 1) to compare against.
 #' @param n Count value (integer) to compare against.
 #' @param na.rm Logical. Should missing values be removed before calculation?
 #'
-#' @return \code{TRUE} if the condition is met for more than the specified proportion or count, otherwise \code{FALSE}.
+#' @return \code{TRUE} if the condition is met for more than the specified
+#'    proportion or count, otherwise \code{FALSE}.
 #' @examples
 #' # Check if more than 70% of values are TRUE
 #' more_than(c(TRUE, TRUE, FALSE, TRUE), p = 0.7)  # Returns TRUE
@@ -387,15 +425,16 @@ more_than <- function(logical_vec, p = NULL, n = NULL, na.rm = FALSE) {
 
 #' Facilitate "At Most" Comparison on Logical Vectors
 #'
-#' This function facilitates a comparison to check if at most a specified proportion or count of values in a logical vector
-#' evaluate to \code{TRUE}.
+#' This function facilitates a comparison to check if at most a specified
+#' proportion or count of values in a logical vector evaluate to \code{TRUE}.
 #'
 #' @param logical_vec A logical vector.
 #' @param p Proportion value (0 to 1) to compare against.
 #' @param n Count value (integer) to compare against.
 #' @param na.rm Logical. Should missing values be removed before calculation?
 #'
-#' @return \code{TRUE} if the condition is met for at most the specified proportion or count, otherwise \code{FALSE}.
+#' @return \code{TRUE} if the condition is met for at most the specified
+#'    proportion or count, otherwise \code{FALSE}.
 #' @examples
 #' # Check if at most 20% of values are TRUE
 #' at_most(c(TRUE, FALSE, TRUE, TRUE), p = 0.2)  # Returns TRUE
@@ -409,7 +448,8 @@ at_most <- function(logical_vec, p = NULL, n = NULL, na.rm = FALSE) {
 
 #' Facilitate "Less Than" Comparison on Logical Vectors
 #'
-#' This function facilitates a comparison to check if less than a specified proportion or count of values in a logical vector
+#' This function facilitates a comparison to check if less than a specified
+#' proportion or count of values in a logical vector
 #' evaluate to \code{TRUE}.
 #'
 #' @param logical_vec A logical vector.
@@ -417,12 +457,14 @@ at_most <- function(logical_vec, p = NULL, n = NULL, na.rm = FALSE) {
 #' @param n Count value (integer) to compare against.
 #' @param na.rm Logical. Should missing values be removed before calculation?
 #'
-#' @return \code{TRUE} if the condition is met for less than the specified proportion or count, otherwise \code{FALSE}.
+#' @return \code{TRUE} if the condition is met for less than the specified
+#'    proportion or count, otherwise \code{FALSE}.
 #' @examples
 #' # Check if less than 10% of values are TRUE
 #' less_than(c(TRUE, FALSE, FALSE), p = 0.1)  # Returns FALSE
 #'
 #' @family basic_quantifiers
+#' @seealso \link{\code{check_that}}
 #'
 #' @export
 less_than <- function(logical_vec, p = NULL, n = NULL, na.rm = FALSE) {
@@ -431,15 +473,16 @@ less_than <- function(logical_vec, p = NULL, n = NULL, na.rm = FALSE) {
 
 #' Facilitate "Exactly Equal" Comparison on Logical Vectors
 #'
-#' This function facilitates a comparison to check if the proportion or count of values in a logical vector is exactly equal
-#' to a specified value.
+#' This function facilitates a comparison to check if the proportion or count
+#' of values in a logical vector is exactly equal to a specified value.
 #'
 #' @param logical_vec A logical vector.
 #' @param p Proportion value (0 to 1) to compare against.
 #' @param n Count value (integer) to compare against.
 #' @param na.rm Logical. Should missing values be removed before calculation?
 #'
-#' @return \code{TRUE} if the proportion or count of values is exactly equal to the specified value, otherwise \code{FALSE}.
+#' @return \code{TRUE} if the proportion or count of values is exactly equal to
+#' the specified value, otherwise \code{FALSE}.
 #' @examples
 #' # Check if all values are TRUE
 #' exactly_equal(c(TRUE, TRUE, TRUE), p = 1.0)  # Returns TRUE
