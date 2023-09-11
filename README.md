@@ -14,11 +14,10 @@ status](https://www.r-pkg.org/badges/version/checkthat)](https://CRAN.R-project.
 coverage](https://codecov.io/gh/iancero/checkthat/branch/main/graph/badge.svg)](https://app.codecov.io/gh/iancero/checkthat?branch=main)
 <!-- badges: end -->
 
-Most people regularly check that their data are still valid after any
-manipulation and this process is critical to valid analysis results
-later on. Are there any impossible values in a newly created column?
-Does a dataframe have the correct number of columns and rows after a
-join?
+Most people regularly check that their data are valid after a
+manipulation. This process is critical to valid analysis results later
+on. Are there any impossible values in a newly created column? Does a
+dataframe have the correct number of columns and rows after a join?
 
 Despite its importance, the data checking process is usually conducted
 informally by hand or by eye - instead of in code (e.g., as in a unit
@@ -29,8 +28,8 @@ The **checkthat** philosophy is that you already perform good data
 checks and you should keep doing it. But those checks would be even
 better if they lived in the code, rather than in your head. Checkthat
 therefore provides functions that closely resemble the checks you
-already do by hand or by eye, and makes it easy for you to also express
-them in code.
+already do by hand or by eye, so that it is easy for you to also express
+them in code as you go.
 
 ## Basic usage
 
@@ -52,8 +51,9 @@ mtcars |>
 #> ✔ all data checks passing
 ```
 
-When at least one check fails, you get a more detailed breakdown of what
-went wrong.
+When at least one check fails, `check_that()` throws an error, halting
+the potentially risky execution of subsequent code. It then gives you
+get a detailed breakdown of what the outcome was for each test.
 
 ``` r
 mtcars |>
@@ -73,11 +73,11 @@ mtcars |>
 #> ! At least one data check failed.
 ```
 
-Additionally, the `check_that()` function is designed to work with both
-base R’s existing logical functions (e.g., `all()`, `any()`), as well
-it’s own set of more flexible helper functions. Theses helper functions
-are designed to be both readable and to mirror in code what you already
-do manually by eye-balling a dataset.
+The `check_that()` function is designed to work with both base R’s
+existing logical functions (e.g., `all()`, `any()`), as well it’s own
+set of more flexible helper functions. Theses helper functions are
+designed to be both readable and to mirror in code what you already do
+manually by eye-balling a dataset.
 
 ``` r
 mtcars |>
@@ -318,6 +318,18 @@ might be a better choice for you.
   designed to directly embed your tests into data manipulation
   pipelines, testdat is designed to place tests in separate code blocks
   or even files.
+
+- [**validate**](https://github.com/data-cleaning/validate) is another
+  well-developed and popular data checking package. It can work is ways
+  that are similar to checkthat (and it also has its own analogous
+  `check_that()` function). However, the validate package is primarily
+  dedicated to specifying your data validation rules in advance, rather
+  than the on-the-fly approach for checkthat. This is ideal when you
+  want your validation rules to be repeatable. For example, you might
+  want `Sepal.Width < 0.5*Sepal.Length` to always be `TRUE`, no matter
+  where you are in the analysis. In contrast, f you want simple checks
+  that you write concurrently with the data manipulation code itself,
+  then you might prefer checkthat.
 
 [^1]: The `factor()` function maps `wt < 3 == FALSE --> 1` and
     `TRUE --> 2` in this case because `FALSE < TRUE`. So, when

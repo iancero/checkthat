@@ -49,7 +49,7 @@ mtcars |>
   )
 ```
 
-When at least one check fails, you get a more detailed breakdown of what went wrong.
+When at least one check fails, `check_that()` throws an error, halting the potentially risky execution of subsequent code. It then gives you get a detailed breakdown of what the outcome was for each test.
 
 ```{r, echo=FALSE}
 set.seed(123456)
