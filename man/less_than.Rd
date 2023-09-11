@@ -30,8 +30,6 @@ less_than(c(TRUE, FALSE, FALSE), p = 0.1)  # Returns FALSE
 
 }
 \seealso{
-\link{\code{check_that}}
-
 Other basic_quantifiers: 
 \code{\link{at_least}()},
 \code{\link{at_most}()},

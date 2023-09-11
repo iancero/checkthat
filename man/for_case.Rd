@@ -52,4 +52,9 @@ sample_data |>
 backwards_letters <- rev(letters)
 for_case(3, backwards_letters == "x") # TRUE
 }
-\concept{special_quantifiers}
+\seealso{
+Other special quantifiers: 
+\code{\link{some_of}()},
+\code{\link{whenever}()}
+}
+\concept{special quantifiers}
