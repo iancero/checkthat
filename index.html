@@ -62,9 +62,9 @@
 </h1></div>
 <!-- badges: start -->
 
-<p>Most people regularly check that their data are still valid after any manipulation and this process is critical to valid analysis results later on. Are there any impossible values in a newly created column? Does a dataframe have the correct number of columns and rows after a join?</p>
+<p>Most people regularly check that their data are valid after a manipulation. This process is critical to valid analysis results later on. Are there any impossible values in a newly created column? Does a dataframe have the correct number of columns and rows after a join?</p>
 <p>Despite its importance, the data checking process is usually conducted informally by hand or by eye - instead of in code (e.g., as in a unit test). If something in your pipeline is modified later, how can you be sure everything that comes after that change remains valid?</p>
-<p>The <strong>checkthat</strong> philosophy is that you already perform good data checks and you should keep doing it. But those checks would be even better if they lived in the code, rather than in your head. Checkthat therefore provides functions that closely resemble the checks you already do by hand or by eye, and makes it easy for you to also express them in code.</p>
+<p>The <strong>checkthat</strong> philosophy is that you already perform good data checks and you should keep doing it. But those checks would be even better if they lived in the code, rather than in your head. Checkthat therefore provides functions that closely resemble the checks you already do by hand or by eye, so that it is easy for you to also express them in code as you go.</p>
 <div class="section level2">
 <h2 id="basic-usage">Basic usage<a class="anchor" aria-label="anchor" href="#basic-usage"></a>
 </h2>
@@ -79,7 +79,7 @@
 <span>    <span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/any.html" class="external-link">any</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html" class="external-link">is.na</a></span><span class="op">(</span><span class="va">mpg</span><span class="op">)</span><span class="op">)</span></span>
 <span>  <span class="op">)</span></span>
 <span><span class="co">#&gt; ✔ all data checks passing</span></span></code></pre></div>
-<p>When at least one check fails, you get a more detailed breakdown of what went wrong.</p>
+<p>When at least one check fails, <code><a href="reference/check_that.html">check_that()</a></code> throws an error, halting the potentially risky execution of subsequent code. It then gives you get a detailed breakdown of what the outcome was for each test.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">mtcars</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="reference/check_that.html">check_that</a></span><span class="op">(</span></span>
@@ -96,7 +96,7 @@
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Error in `cli_throw_test_error()`:</span></span>
 <span><span class="co">#&gt; ! At least one data check failed.</span></span></code></pre></div>
-<p>Additionally, the <code><a href="reference/check_that.html">check_that()</a></code> function is designed to work with both base R’s existing logical functions (e.g., <code><a href="https://rdrr.io/r/base/all.html" class="external-link">all()</a></code>, <code><a href="https://rdrr.io/r/base/any.html" class="external-link">any()</a></code>), as well it’s own set of more flexible helper functions. Theses helper functions are designed to be both readable and to mirror in code what you already do manually by eye-balling a dataset.</p>
+<p>The <code><a href="reference/check_that.html">check_that()</a></code> function is designed to work with both base R’s existing logical functions (e.g., <code><a href="https://rdrr.io/r/base/all.html" class="external-link">all()</a></code>, <code><a href="https://rdrr.io/r/base/any.html" class="external-link">any()</a></code>), as well it’s own set of more special helper functions. Theses helper functions are designed to be both readable and to mirror in code what you already do manually by eye-balling a dataset.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">mtcars</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="reference/check_that.html">check_that</a></span><span class="op">(</span></span>
@@ -159,7 +159,7 @@
 <div class="section level2">
 <h2 id="helper-functions">Helper functions<a class="anchor" aria-label="anchor" href="#helper-functions"></a>
 </h2>
-<p>Checkthat’s philosophy is your existing data checks by eye are probably already good. Their only major problem is that they live in your head and not in your code. So, checkthat provides a range of helper functions to work alongside base R’s existing collection (e.g., <code><a href="https://rdrr.io/r/base/all.html" class="external-link">all()</a></code>, <code><a href="https://rdrr.io/r/base/any.html" class="external-link">any()</a></code>). These include both some basic and more flexible varieties.</p>
+<p>Checkthat’s philosophy is your existing data checks by eye are probably already good. Their only major problem is that they live in your head and not in your code. So, checkthat provides a range of helper functions to work alongside base R’s existing collection (e.g., <code><a href="https://rdrr.io/r/base/all.html" class="external-link">all()</a></code>, <code><a href="https://rdrr.io/r/base/any.html" class="external-link">any()</a></code>). These include both some basic and more special varieties.</p>
 <div class="section level3">
 <h3 id="basic-helpers">Basic helpers<a class="anchor" aria-label="anchor" href="#basic-helpers"></a>
 </h3>
@@ -176,7 +176,7 @@
 <span><span class="co">#&gt; ✔ all data checks passing</span></span></code></pre></div>
 </div>
 <div class="section level3">
-<h3 id="flexible-helpers">Flexible helpers<a class="anchor" aria-label="anchor" href="#flexible-helpers"></a>
+<h3 id="special-helpers">Special helpers<a class="anchor" aria-label="anchor" href="#special-helpers"></a>
 </h3>
 <p>The remaining helpers include <code><a href="reference/some_of.html">some_of()</a></code>, <code><a href="reference/whenever.html">whenever()</a></code>, and <code><a href="reference/for_case.html">for_case()</a></code> and are more flexible than their basic counterparts. They’re optimized for the kind of semi-approximate data checking you are likely already doing by eye.</p>
 <p>For most people, this involves a general sense of what most of the data should look like most of the time, but not exact knowledge of specific proportions or counts. For example, you might have good reason to think <code><a href="reference/some_of.html">some_of()</a></code> the <code>cyl</code> values should be greater than 4, but you don’t know exactly how many. However, you do know it should probably be <code>at_least</code> 30%, but <code>at_most</code> 25 total cases in your dataset. Anything outside that range would be implausible and so you want to guard it with <code><a href="reference/check_that.html">check_that()</a></code>.</p>
@@ -188,9 +188,9 @@
 <span>    <span class="fu"><a href="reference/for_case.html">for_case</a></span><span class="op">(</span><span class="fl">2</span>, <span class="va">mpg</span> <span class="op">==</span> <span class="fl">21</span>, <span class="va">hp</span> <span class="op">==</span> <span class="fl">110</span><span class="op">)</span></span>
 <span>  <span class="op">)</span></span>
 <span><span class="co">#&gt; ✔ all data checks passing</span></span></code></pre></div>
-<p>Just like unit tests for production code, the tests created with these flexible helper functions will be technically imperfect and leave some (possibly important) scenarios addressed. After all, there’s a big range of possibilities between <code>at_least = .30</code> and <code>at_most = 25</code>, and some of them might involve an undetected data problem.</p>
+<p>Just like unit tests for production code, the tests created with these special helper functions will be technically imperfect and leave some (possibly important) scenarios addressed. After all, there’s a big range of possibilities between <code>at_least = .30</code> and <code>at_most = 25</code>, and some of them might involve an undetected data problem.</p>
 <p>However, checkthat takes the position that imperfect tests are still valuable informative and you should be able to take advantage of them. For example, if you have reasons to be concerned about the data in your column crossing the <code>at_most = 25</code>, you should be able to quickly and easily write that test with a combination of <code><a href="reference/check_that.html">check_that()</a></code> and <code><a href="reference/some_of.html">some_of()</a></code>.</p>
-<p>Moreover, a world of <em>no tests at all</em> is much worse than a world of <em>some tests that fail to cover every case</em>. With that in mind, checkthat’s flexible helper functions are designed to bring you from <em>not writing down any tests in your code</em> to <em>quickly and easily coding the tests you already do by eye</em>.</p>
+<p>Moreover, a world of <em>no tests at all</em> is much worse than a world of <em>some tests that fail to cover every case</em>. With that in mind, checkthat’s special helper functions are designed to bring you from <em>not writing down any tests in your code</em> to <em>quickly and easily coding the tests you already do by eye</em>.</p>
 </div>
 </div>
 <div class="section level2">
@@ -237,6 +237,7 @@
 <ul>
 <li><p><a href="https://testthat.r-lib.org/" class="external-link"><strong>testthat</strong></a> implements <strong>unit testing for packages</strong> and is currently the most popular testing package for R. If your goal is to develop a package - rather than conduct a data analysis - then testthat will be a much better choice than checkthat.</p></li>
 <li><p><a href="https://socialresearchcentre.github.io/testdat/index.html" class="external-link"><strong>testdat</strong></a> is inspired by testhat and - like checkthat - also implements <strong>unit testing for data</strong>. It is different from checkthat in two ways. First, it is a more mature package than checkthat, and is therefore potentially more stable in the near term. Second, whereas checkthat is designed to directly embed your tests into data manipulation pipelines, testdat is designed to place tests in separate code blocks or even files.</p></li>
+<li><p><a href="https://github.com/data-cleaning/validate" class="external-link"><strong>validate</strong></a> is another well-developed and popular data checking package. It can work is ways that are similar to checkthat (and it also has its own analogous <code><a href="reference/check_that.html">check_that()</a></code> function). However, the validate package is primarily dedicated to specifying your data validation rules in advance, rather than the on-the-fly approach for checkthat. This is ideal when you want your validation rules to be repeatable. For example, you might want <code>Sepal.Width &lt; 0.5*Sepal.Length</code> to always be <code>TRUE</code>, no matter where you are in the analysis. In contrast, f you want simple checks that you write concurrently with the data manipulation code itself, then you might prefer checkthat.</p></li>
 </ul>
 </div>
 </div>
