@@ -2,13 +2,55 @@
 % Please edit documentation in R/quantifiers.R
 \name{whenever}
 \alias{whenever}
-\title{Title}
+\title{Whenever one condition is true, check other logical conditions also hold}
 \usage{
 whenever(is_observed, then_expect, ...)
 }
 \arguments{
-\item{...}{}
+\item{is_observed}{A logical vector indicating the when the observed cases of
+interest.}
+
+\item{then_expect}{A logical vector indicating the conditions to be checked
+for those observed cases in \code{is_observed}.}
+
+\item{...}{A set of qualifying logical conditions (e.g.,
+\code{at_least = .50}) to be checked in conjunction with \code{then_expect}.}
+}
+\value{
+A logical value indicating whether all specified conditions in
+\code{then_expect} hold true, whenever \code{is_observed} is TRUE.
 }
 \description{
-Title
+Designed as a helper function for \code{check_that()}, this function checks
+that whenever a certain condition is observed, other expected conditions
+hold as well.
 }
+\details{
+This function is designed as a helper function for \code{check_that()}. It is
+useful for checking, whenever an event or condition of interest
+(\code{is_observed}) is true, that certain logical conditions
+(\code{then_expect}) also hold true. You can provide additional qualifiers
+(\code{...}) to clarify how often \code{then_expect} must resolve to TRUE.
+}
+\examples{
+#whenever() is designed to work with check_that()
+df <- data.frame(x = 1:5, y = 6:10)
+
+df |>
+  check_that(
+    whenever(is_observed = x > 3, then_expect = y > 8),
+    whenever(x \%in\% 2:3, y > 6, at_least = .50) # qualifying condition
+  )
+
+# whenever() can also work outside check_that()
+x <- 1:5
+y <- 6:10
+
+whenever(x > 3, y > 9, at_least = 1/2)  # TRUE
+}
+\seealso{
+Other special quantifiers: 
+\code{\link{for_case}()},
+\code{\link{some_of}()}
+}
+\concept{special quantifiers}

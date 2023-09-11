@@ -2,13 +2,66 @@
 % Please edit documentation in R/quantifiers.R
 \name{some_of}
 \alias{some_of}
-\title{Title}
+\title{Check if logical conditions are met some of the time in a logical vector}
 \usage{
 some_of(logical_vec, ...)
 }
 \arguments{
-\item{...}{}
+\item{logical_vec}{A logical vector to be checked.}
+
+\item{...}{A set of one or more frequency specifiers (e.g.,
+\code{at_least = 5}, \code{at_most = .70}).}
+}
+\value{
+A logical value indicating all conditions specified in \code{...}
+resolve to TRUE in the given \code{logical_vec}.
 }
 \description{
-Title
+Designed as a helper function for \code{check_that()}, this function
+allows you to check that a certain percentage or count of TRUE values are
+observed in a logical vector. It is therefore a more flexible version of
+\code{all()} or \code{any()}.
 }
+\details{
+This function is designed as a helper function for \code{check_that()}. It
+allows you to validate that a certain percentage or count of TRUE values are
+observed in a logical vector. It is therefore a more flexible version of
+\code{all()} or \code{any()}.
+
+The named arguments in \code{...} should correspond to quantifiers (e.g.,
+\code{at_least}, \code{at_most}) followed by a numeric value representing
+the criteria for that quantifier (either an integer count or proportion
+between zero and one). For example, \code{at_least = 2} checks if at least 2
+TRUE values are present in \code{logical_vec}.
+
+Note, specifying exactly 1 in an argument is ambiguous (e.g.,
+\code{at_least = 1}). Because it could represent a count (n = 1) or a
+proportion (100\%), this value is not allowed in \code{some_of()} and will
+throw an error. If you need to specify exactly 1 (either as a count or a
+proportion), please use a more specific quantifier function, such as
+\code{at_least(logical_vec, p = 1)} or \code{at_least(logical_vec, n = 1)}.
+}
+\examples{
+logical_vec <- c(TRUE, FALSE, TRUE, FALSE, TRUE)
+
+# Check if at least 2 TRUE values are present
+some_of(logical_vec, at_least = 2)  # TRUE
+
+# Check if at most 2 TRUE values are present
+some_of(logical_vec, at_most = 2)  # FALSE
+
+# Check if exactly 3 TRUE values are present
+some_of(logical_vec, exactly_equal = 3)  # TRUE
+
+# Check if exactly 4 TRUE values are present
+some_of(logical_vec, exactly_equal = 3)  # FALSE
+
+# Invalid usage: No specific quantifiers provided (error will be thrown)
+try(some_of(logical_vec))  # Error
+}
+\seealso{
+Other special quantifiers: 
+\code{\link{for_case}()},
+\code{\link{whenever}()}
+}
+\concept{special quantifiers}

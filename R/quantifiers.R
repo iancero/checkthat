@@ -243,15 +243,60 @@ is_logical_vec <- function(logical_vec) {
 }
 
 
-#' Title
+#' Check if logical conditions are met some of the time in a logical vector
 #'
-#' @param logical_vec
-#' @param ...
+#' Designed as a helper function for \code{check_that()}, this function
+#' allows you to check that a certain percentage or count of TRUE values are
+#' observed in a logical vector. It is therefore a more flexible version of
+#' \code{all()} or \code{any()}.
 #'
-#' @return
-#' @export
+#' @param logical_vec A logical vector to be checked.
+#' @param ... A set of one or more frequency specifiers (e.g.,
+#'    \code{at_least = 5}, \code{at_most = .70}).
+#'
+#' @return A logical value indicating all conditions specified in \code{...}
+#'    resolve to TRUE in the given \code{logical_vec}.
+#'
+#' @details
+#'
+#' This function is designed as a helper function for \code{check_that()}. It
+#' allows you to validate that a certain percentage or count of TRUE values are
+#' observed in a logical vector. It is therefore a more flexible version of
+#' \code{all()} or \code{any()}.
+#'
+#' The named arguments in \code{...} should correspond to quantifiers (e.g.,
+#' \code{at_least}, \code{at_most}) followed by a numeric value representing
+#' the criteria for that quantifier (either an integer count or proportion
+#' between zero and one). For example, \code{at_least = 2} checks if at least 2
+#' TRUE values are present in \code{logical_vec}.
+#'
+#' Note, specifying exactly 1 in an argument is ambiguous (e.g.,
+#' \code{at_least = 1}). Because it could represent a count (n = 1) or a
+#' proportion (100%), this value is not allowed in \code{some_of()} and will
+#' throw an error. If you need to specify exactly 1 (either as a count or a
+#' proportion), please use a more specific quantifier function, such as
+#' \code{at_least(logical_vec, p = 1)} or \code{at_least(logical_vec, n = 1)}.
+#'
+#' @family special quantifiers
 #'
 #' @examples
+#' logical_vec <- c(TRUE, FALSE, TRUE, FALSE, TRUE)
+#'
+#' # Check if at least 2 TRUE values are present
+#' some_of(logical_vec, at_least = 2)  # TRUE
+#'
+#' # Check if at most 2 TRUE values are present
+#' some_of(logical_vec, at_most = 2)  # FALSE
+#'
+#' # Check if exactly 3 TRUE values are present
+#' some_of(logical_vec, exactly_equal = 3)  # TRUE
+#'
+#' # Check if exactly 4 TRUE values are present
+#' some_of(logical_vec, exactly_equal = 3)  # FALSE
+#'
+#' # Invalid usage: No specific quantifiers provided (error will be thrown)
+#' try(some_of(logical_vec))  # Error
+#'@export
 some_of <- function(logical_vec, ...) {
   validate_logical_vec(logical_vec)
 
@@ -283,16 +328,47 @@ some_of <- function(logical_vec, ...) {
 }
 
 
-#' Title
+#' Whenever one condition is true, check other logical conditions also hold
 #'
-#' @param is_observed
-#' @param then_expect
-#' @param ...
+#' Designed as a helper function for \code{check_that()}, this function checks
+#' that whenever a certain condition is observed, other expected conditions
+#' hold as well.
 #'
-#' @return
-#' @export
+#' @param is_observed A logical vector indicating the when the observed cases of
+#'    interest.
+#' @param then_expect A logical vector indicating the conditions to be checked
+#'    for those observed cases in \code{is_observed}.
+#' @param ... A set of qualifying logical conditions (e.g.,
+#'    \code{at_least = .50}) to be checked in conjunction with \code{then_expect}.
+#'
+#' @returns A logical value indicating whether all specified conditions in
+#'    \code{then_expect} hold true, whenever \code{is_observed} is TRUE.
+#'
+#' @details
+#' This function is designed as a helper function for \code{check_that()}. It is
+#' useful for checking, whenever an event or condition of interest
+#' (\code{is_observed}) is true, that certain logical conditions
+#' (\code{then_expect}) also hold true. You can provide additional qualifiers
+#' (\code{...}) to clarify how often \code{then_expect} must resolve to TRUE.
+#'
+#' @family special quantifiers
 #'
 #' @examples
+#' #whenever() is designed to work with check_that()
+#' df <- data.frame(x = 1:5, y = 6:10)
+#'
+#' df |>
+#'   check_that(
+#'     whenever(is_observed = x > 3, then_expect = y > 8),
+#'     whenever(x %in% 2:3, y > 6, at_least = .50) # qualifying condition
+#'   )
+#'
+#' # whenever() can also work outside check_that()
+#' x <- 1:5
+#' y <- 6:10
+#'
+#' whenever(x > 3, y > 9, at_least = 1/2)  # TRUE
+#'@export
 whenever <- function(is_observed, then_expect, ...) {
   validate_logical_vec(is_observed)
   validate_logical_vec(then_expect)
@@ -337,7 +413,7 @@ whenever <- function(is_observed, then_expect, ...) {
 #' does not satisfy the condition \code{length(which(case)) == 1}, the function
 #' will throw an error.
 #'
-#' @family special_quantifiers
+#' @family special quantifiers
 #'
 #' @examples
 #' # for_case is designed primarily as a helper function for check_that
@@ -464,7 +540,6 @@ at_most <- function(logical_vec, p = NULL, n = NULL, na.rm = FALSE) {
 #' less_than(c(TRUE, FALSE, FALSE), p = 0.1)  # Returns FALSE
 #'
 #' @family basic_quantifiers
-#' @seealso \link{\code{check_that}}
 #'
 #' @export
 less_than <- function(logical_vec, p = NULL, n = NULL, na.rm = FALSE) {
