@@ -75,7 +75,7 @@ mtcars |>
 
 The `check_that()` function is designed to work with both base R’s
 existing logical functions (e.g., `all()`, `any()`), as well it’s own
-set of more flexible helper functions. Theses helper functions are
+set of more special helper functions. Theses helper functions are
 designed to be both readable and to mirror in code what you already do
 manually by eye-balling a dataset.
 
@@ -179,7 +179,7 @@ Checkthat’s philosophy is your existing data checks by eye are probably
 already good. Their only major problem is that they live in your head
 and not in your code. So, checkthat provides a range of helper functions
 to work alongside base R’s existing collection (e.g., `all()`, `any()`).
-These include both some basic and more flexible varieties.
+These include both some basic and more special varieties.
 
 ### Basic helpers
 
@@ -200,7 +200,7 @@ mtcars |>
 #> ✔ all data checks passing
 ```
 
-### Flexible helpers
+### Special helpers
 
 The remaining helpers include `some_of()`, `whenever()`, and
 `for_case()` and are more flexible than their basic counterparts.
@@ -227,7 +227,7 @@ mtcars |>
 ```
 
 Just like unit tests for production code, the tests created with these
-flexible helper functions will be technically imperfect and leave some
+special helper functions will be technically imperfect and leave some
 (possibly important) scenarios addressed. After all, there’s a big range
 of possibilities between `at_least = .30` and `at_most = 25`, and some
 of them might involve an undetected data problem.
@@ -241,9 +241,9 @@ easily write that test with a combination of `check_that()` and
 
 Moreover, a world of *no tests at all* is much worse than a world of
 *some tests that fail to cover every case*. With that in mind,
-checkthat’s flexible helper functions are designed to bring you from
-*not writing down any tests in your code* to *quickly and easily coding
-the tests you already do by eye*.
+checkthat’s special helper functions are designed to bring you from *not
+writing down any tests in your code* to *quickly and easily coding the
+tests you already do by eye*.
 
 ## Checking the whole dataframe
 
