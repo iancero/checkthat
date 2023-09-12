@@ -1,6 +1,6 @@
 Package: checkthat
 Title: Intuitive Unit Testing Tools For Data Wrangling Pipelines
-Version: 0.0.0.9000
+Version: 0.1.0
 Authors@R: 
     person("Ian", "Cero", , "ian_cero@urmc.rochester.edu", role = c("aut", 
         "cre", "cph"), comment = c(ORCID = "0000-0002-2862-0450"))

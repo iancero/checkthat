@@ -1,4 +1,4 @@
-# checkthat (development version)
+# checkthat 0.1.0
 
 * Initial CRAN submission.
 
