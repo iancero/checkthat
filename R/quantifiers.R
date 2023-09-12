@@ -10,7 +10,7 @@
 #'             Possible values: "p" for proportions, "n" for counts.
 #' @param na.rm Logical. Should missing values be removed when aggregating?
 #'
-#' @return Depending on the \code{type} parameter, returns either the proportion
+#' @returns Depending on the \code{type} parameter, returns either the proportion
 #'         of \code{TRUE} values in the logical vector or the count of
 #'         \code{TRUE} values.
 #'
@@ -48,7 +48,7 @@ aggregator <- function(logical_vec, type = NULL, na.rm = FALSE) {
 #' @param operator A binary operator function (e.g., \code{<}, \code{>},
 #'                \code{==}).
 #'
-#' @return A quantification function that takes logical vector(s) and a criteria
+#' @returns A quantification function that takes logical vector(s) and a criteria
 #'        value (either proportion or count) and performs the specified
 #'        operation.
 #'
@@ -116,7 +116,7 @@ quantifier <- function(operator) {
 #'              from both the numerator and denominator of the proportion
 #'              calculation.
 #'
-#' @return The proportion of \code{TRUE} values in the logical vector.
+#' @returns The proportion of \code{TRUE} values in the logical vector.
 #'
 #' @examples
 #' prop(c(TRUE, TRUE, FALSE, TRUE)) # Returns 0.75
@@ -155,7 +155,7 @@ prop <- function(logical_vec, na.rm = FALSE) {
 #'                          not a valid proportion (p) or count (n)? Defaults to
 #'                          \code{TRUE}.
 #'
-#' @return A character string: "p" if \code{num} represents a proportion, "n" if
+#' @returns A character string: "p" if \code{num} represents a proportion, "n" if
 #'          it represents a count, and \code{FALSE} if neither applies.
 #'
 #' @examples
@@ -212,7 +212,7 @@ is_p_or_n <- function(num, error_on_1 = TRUE, error_on_nothing = TRUE) {
 #'
 #' @param logical_vec A vector to be evaluated.
 #'
-#' @return \code{TRUE} if \code{logical_vec} is a valid logical vector, otherwise \code{FALSE}.
+#' @returns \code{TRUE} if \code{logical_vec} is a valid logical vector, otherwise \code{FALSE}.
 #'
 #' @examples
 #' # Check if a valid logical vector
@@ -254,7 +254,7 @@ is_logical_vec <- function(logical_vec) {
 #' @param ... A set of one or more frequency specifiers (e.g.,
 #'    \code{at_least = 5}, \code{at_most = .70}).
 #'
-#' @return A logical value indicating all conditions specified in \code{...}
+#' @returns A logical value indicating all conditions specified in \code{...}
 #'    resolve to TRUE in the given \code{logical_vec}.
 #'
 #' @details
@@ -393,7 +393,7 @@ whenever <- function(is_observed, then_expect, ...) {
 #'    row(s) to check. If a logical vector, it must have exactly 1 TRUE element
 #'    (i.e., that can be used to infer the row of interest).
 #' @param ... A set of logical conditions to be checked.
-#' @return A logical value indicating whether ALL specified conditions hold
+#' @returns A logical value indicating whether ALL specified conditions hold
 #'    true for the specified data row (i.e., \code{case}).
 #'
 #' @details
@@ -463,7 +463,7 @@ for_case <- function(case, ...) {
 #' @param n Count value (integer) to compare against.
 #' @param na.rm Logical. Should missing values be removed before calculation?
 #'
-#' @return \code{TRUE} if the condition is met for at least the specified
+#' @returns \code{TRUE} if the condition is met for at least the specified
 #'    proportion or count, otherwise \code{FALSE}.
 #' @examples
 #' # Check if at least 50% of values are TRUE
@@ -486,7 +486,7 @@ at_least <- function(logical_vec, p = NULL, n = NULL, na.rm = FALSE) {
 #' @param n Count value (integer) to compare against.
 #' @param na.rm Logical. Should missing values be removed before calculation?
 #'
-#' @return \code{TRUE} if the condition is met for more than the specified
+#' @returns \code{TRUE} if the condition is met for more than the specified
 #'    proportion or count, otherwise \code{FALSE}.
 #' @examples
 #' # Check if more than 70% of values are TRUE
@@ -509,7 +509,7 @@ more_than <- function(logical_vec, p = NULL, n = NULL, na.rm = FALSE) {
 #' @param n Count value (integer) to compare against.
 #' @param na.rm Logical. Should missing values be removed before calculation?
 #'
-#' @return \code{TRUE} if the condition is met for at most the specified
+#' @returns \code{TRUE} if the condition is met for at most the specified
 #'    proportion or count, otherwise \code{FALSE}.
 #' @examples
 #' # Check if at most 20% of values are TRUE
@@ -533,7 +533,7 @@ at_most <- function(logical_vec, p = NULL, n = NULL, na.rm = FALSE) {
 #' @param n Count value (integer) to compare against.
 #' @param na.rm Logical. Should missing values be removed before calculation?
 #'
-#' @return \code{TRUE} if the condition is met for less than the specified
+#' @returns \code{TRUE} if the condition is met for less than the specified
 #'    proportion or count, otherwise \code{FALSE}.
 #' @examples
 #' # Check if less than 10% of values are TRUE
@@ -556,7 +556,7 @@ less_than <- function(logical_vec, p = NULL, n = NULL, na.rm = FALSE) {
 #' @param n Count value (integer) to compare against.
 #' @param na.rm Logical. Should missing values be removed before calculation?
 #'
-#' @return \code{TRUE} if the proportion or count of values is exactly equal to
+#' @returns \code{TRUE} if the proportion or count of values is exactly equal to
 #' the specified value, otherwise \code{FALSE}.
 #' @examples
 #' # Check if all values are TRUE
