@@ -4,11 +4,11 @@ Version: 0.0.0.9000
 Authors@R: 
     person("Ian", "Cero", , "ian_cero@urmc.rochester.edu", role = c("aut", 
         "cre", "cph"), comment = c(ORCID = "0000-0002-2862-0450"))
-Description: The checkthat package provides a lightweight data validation and 
+Description: The 'checkthat' package provides a lightweight data validation and 
     testing toolkit for R. Its guiding philosophy is that adding code-based data 
     checks to users' existing workflow should be both quick and intuitive. The 
     suite of functions included therefore mirror the common data checks many 
-    users already perform by hand or by eye. Additionally, the checkthat 
+    users already perform by hand or by eye. Additionally, the 'checkthat' 
     package is optimized to work within tidyverse data manipulation pipelines.
 License: MIT + file LICENSE
 URL: https://github.com/iancero/checkthat,
