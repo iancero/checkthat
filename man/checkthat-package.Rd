@@ -4,9 +4,9 @@
 \name{checkthat-package}
 \alias{checkthat}
 \alias{checkthat-package}
-\title{checkthat: Intuitive Unit Testing Tools For Data Wrangling Pipelines}
+\title{checkthat: Intuitive Unit Testing Tools for Data Manipulation}
 \description{
-The checkthat package provides a lightweight data validation and testing toolkit for R. Its guiding philosophy is that adding code-based data checks to users' existing workflow should be both quick and intuitive. The suite of functions included therefore mirror the common data checks many users already perform by hand or by eye. Additionally, the checkthat package is optimized to work within tidyverse data manipulation pipelines.
+Provides a lightweight data validation and testing toolkit for R. Its guiding philosophy is that adding code-based data checks to users' existing workflow should be both quick and intuitive. The suite of functions included therefore mirror the common data checks many users already perform by hand or by eye. Additionally, the 'checkthat' package is optimized to work within tidyverse data manipulation pipelines.
 }
 \seealso{
 Useful links:
