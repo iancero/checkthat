@@ -28,7 +28,7 @@
 #' @param encourage Logical. If \code{TRUE}, encouraging messages will be
 #'                  displayed for tests that pass.
 #'
-#' @return (invisibly) the original, unmodified \code{.data} dataframe.
+#' @returns (invisibly) the original, unmodified \code{.data} dataframe.
 #'
 #' @seealso \code{\link{some_of}}, \code{\link{whenever}},
 #'          \code{\link{for_case}}
