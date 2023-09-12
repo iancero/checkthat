@@ -14,7 +14,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-```{r, echo=FALSEsetup}
+```{r setup, echo=FALSE}
 library(checkthat)
 ```
 
