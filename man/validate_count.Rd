@@ -20,10 +20,10 @@ This function validates whether a numeric value is a valid count (integer of
 zero or greater).
 }
 \examples{
-validate_count(0)   # TRUE
-validate_count(3)   # TRUE
+validate_count(0) # TRUE
+validate_count(3) # TRUE
 try(validate_count(0, include_zero = FALSE)) # Error: Not a valid count
-try(validate_count(-1))  # Error: Not a valid count value.
+try(validate_count(-1)) # Error: Not a valid count value.
 }
 \seealso{
 \code{\link{is_count}}, \code{\link{is_proportion}},

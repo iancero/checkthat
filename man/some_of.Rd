@@ -45,19 +45,19 @@ proportion), please use a more specific quantifier function, such as
 logical_vec <- c(TRUE, FALSE, TRUE, FALSE, TRUE)
 
 # Check if at least 2 TRUE values are present
-some_of(logical_vec, at_least = 2)  # TRUE
+some_of(logical_vec, at_least = 2) # TRUE
 
 # Check if at most 2 TRUE values are present
-some_of(logical_vec, at_most = 2)  # FALSE
+some_of(logical_vec, at_most = 2) # FALSE
 
 # Check if exactly 3 TRUE values are present
-some_of(logical_vec, exactly_equal = 3)  # TRUE
+some_of(logical_vec, exactly_equal = 3) # TRUE
 
 # Check if exactly 4 TRUE values are present
-some_of(logical_vec, exactly_equal = 3)  # FALSE
+some_of(logical_vec, exactly_equal = 3) # FALSE
 
 # Invalid usage: No specific quantifiers provided (error will be thrown)
-try(some_of(logical_vec))  # Error
+try(some_of(logical_vec)) # Error
 }
 \seealso{
 Other special quantifiers: 

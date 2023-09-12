@@ -25,7 +25,7 @@ of values in a logical vector is exactly equal to a specified value.
 }
 \examples{
 # Check if all values are TRUE
-exactly_equal(c(TRUE, TRUE, TRUE), p = 1.0)  # Returns TRUE
+exactly_equal(c(TRUE, TRUE, TRUE), p = 1.0) # Returns TRUE
 
 }
 \seealso{

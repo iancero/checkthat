@@ -25,7 +25,7 @@ proportion or count of values in a logical vector evaluate to \code{TRUE}.
 }
 \examples{
 # Check if at most 20\% of values are TRUE
-at_most(c(TRUE, FALSE, TRUE, TRUE), p = 0.2)  # Returns TRUE
+at_most(c(TRUE, FALSE, TRUE, TRUE), p = 0.2) # Returns TRUE
 
 }
 \seealso{

@@ -21,13 +21,13 @@ missing values (\code{NA}).
 }
 \examples{
 # Check if a valid logical vector
-is_logical_vec(c(TRUE, FALSE, TRUE))  # Returns TRUE
+is_logical_vec(c(TRUE, FALSE, TRUE)) # Returns TRUE
 
 # Check if an empty vector
-is_logical_vec(c())  # Returns FALSE
+is_logical_vec(c()) # Returns FALSE
 
 # Check if a vector with missing values
-is_logical_vec(c(TRUE, FALSE, NA))  # Returns TRUE
-is_logical_vec(c(NA, NA, NA))  # Returns FALSE
+is_logical_vec(c(TRUE, FALSE, NA)) # Returns TRUE
+is_logical_vec(c(NA, NA, NA)) # Returns FALSE
 
 }

@@ -19,10 +19,10 @@ This function checks if a numeric value is a count, meaning it is
 integer-like and non-negative.
 }
 \examples{
-is_count(0)   # TRUE
-is_count(3)   # TRUE
+is_count(0) # TRUE
+is_count(3) # TRUE
 is_count(0, include_zero = FALSE) # FALSE
-is_count(-1)  # FALSE
+is_count(-1) # FALSE
 is_count(1.5) # FALSE
 }
 \seealso{

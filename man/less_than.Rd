@@ -26,7 +26,7 @@ evaluate to \code{TRUE}.
 }
 \examples{
 # Check if less than 10\% of values are TRUE
-less_than(c(TRUE, FALSE, FALSE), p = 0.1)  # Returns FALSE
+less_than(c(TRUE, FALSE, FALSE), p = 0.1) # Returns FALSE
 
 }
 \seealso{

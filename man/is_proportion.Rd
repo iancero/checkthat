@@ -17,8 +17,8 @@ This function checks if a numeric value is a proportion scalar, meaning it
 is numeric and within the range of 0 to 1 (inclusive).
 }
 \examples{
-is_proportion(0.5)  # TRUE
-is_proportion(1.2)  # FALSE
+is_proportion(0.5) # TRUE
+is_proportion(1.2) # FALSE
 is_proportion(-0.2) # FALSE
 }
 \seealso{

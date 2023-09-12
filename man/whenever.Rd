@@ -33,7 +33,7 @@ useful for checking, whenever an event or condition of interest
 (\code{...}) to clarify how often \code{then_expect} must resolve to TRUE.
 }
 \examples{
-#whenever() is designed to work with check_that()
+# whenever() is designed to work with check_that()
 df <- data.frame(x = 1:5, y = 6:10)
 
 df |>
@@ -46,7 +46,7 @@ df |>
 x <- 1:5
 y <- 6:10
 
-whenever(x > 3, y > 9, at_least = 1/2)  # TRUE
+whenever(x > 3, y > 9, at_least = 1 / 2) # TRUE
 }
 \seealso{
 Other special quantifiers: 

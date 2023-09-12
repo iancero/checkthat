@@ -25,7 +25,7 @@ proportion or count of values in a logical vector evaluate to \code{TRUE}.
 }
 \examples{
 # Check if more than 70\% of values are TRUE
-more_than(c(TRUE, TRUE, FALSE, TRUE), p = 0.7)  # Returns TRUE
+more_than(c(TRUE, TRUE, FALSE, TRUE), p = 0.7) # Returns TRUE
 
 }
 \seealso{
