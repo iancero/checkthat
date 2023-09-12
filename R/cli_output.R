@@ -55,6 +55,8 @@ encouraging_message <- function() {
 #' displays a success message in the Command Line Interface (CLI) using the
 #' customized checkthat theme.
 #'
+#' @returns \value{None}
+#'
 #' @keywords internal
 #' @noRd
 cli_check_success <- function() {
@@ -90,6 +92,8 @@ cli_add_encouragement <- function(msg = encouraging_message(), p = .33) {
 #' This is an internal function that is not intended for external use. It
 #' triggers a test error message in the Command Line Interface (CLI) using the
 #' customized checkthat theme.
+#'
+#' @returns \value{None}
 #'
 #' @keywords internal
 #' @noRd
@@ -150,6 +154,8 @@ cli_check_summary <- function(test_results, test_labs) {
 #' @param test_labs A character vector containing labels for the data checks.
 #' @param encourage Logical. If \code{TRUE}, encouraging messages will be
 #'                  displayed when tests pass.
+#'
+#' @returns \value{None}
 #'
 #' @keywords internal
 #' @noRd
