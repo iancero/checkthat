@@ -96,7 +96,7 @@ you gave it (always unmodified). This allows you to easily integrate it
 directly into your data manipulation pipelines.
 
 ``` r
-library(tidyverse)
+library(dplyr)
 
 new_mtcars <- mtcars |>
   select(mpg) |>
@@ -272,6 +272,8 @@ might want to check that the dataset have the correct anticipated
 dimensions.
 
 ``` r
+library(tidyr)
+
 mtcars |>
   check_that(ncol(.d) == 11, nrow(.d) == 32) |> # original dimensions
   pivot_longer(

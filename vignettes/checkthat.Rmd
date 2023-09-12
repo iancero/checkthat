@@ -67,11 +67,11 @@ mtcars |>
 The `check_that()` function always invisibly returns the same `.data` you gave it (always unmodified). This allows you to easily integrate it directly into your data manipulation pipelines.
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
-library(tidyverse)
+library(dplyr)
 ```
 
 ```{r}
-library(tidyverse)
+library(dplyr)
 
 new_mtcars <- mtcars |>
   select(mpg) |>
@@ -164,6 +164,8 @@ mtcars |>
 This is especially useful for operations that could change the shape of your dataset (e.g., pivots, nests, joins). In the case of pivoting, you might want to check that the dataset have the correct anticipated dimensions.
 
 ```{r}
+library(tidyr)
+
 mtcars |>
   check_that(ncol(.d) == 11, nrow(.d) == 32) |> # original dimensions
   pivot_longer(
