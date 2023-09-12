@@ -2,8 +2,8 @@ Package: checkthat
 Title: Intuitive Unit Testing Tools For Data Wrangling Pipelines
 Version: 0.0.0.9000
 Authors@R: 
-    person("Ian", "Cero", , "ian_cero@urmc.rochester.edu", role = c("aut", "cre"),
-           comment = c(ORCID = "0000-0002-2862-0450"))
+    person("Ian", "Cero", , "ian_cero@urmc.rochester.edu", role = c("aut", 
+          "cre", "cph"), comment = c(ORCID = "0000-0002-2862-0450"))
 Description: The checkthat package provides a lightweight data validation and 
 testing toolkit for R. Its guiding philosophy is that adding code-based data 
 checks to users' existing workflow should be both quick and intuitive. The 
