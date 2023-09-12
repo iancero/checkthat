@@ -210,7 +210,7 @@ test_that("is_logical_vec returns FALSE for mixed vector with NA", {
 
 test_that("is_logical_vec returns FALSE for non-vector input", {
   expect_true(is_logical_vec(T))
-  expect_false(is_logical_vec('a'))
+  expect_false(is_logical_vec("a"))
 })
 
 test_that("at_least works correctly with proportion", {
@@ -444,7 +444,7 @@ test_that("whenever correctly evaluates when both at_least and at_most condition
 })
 
 test_that("whenever throws error for non-logical input in is_observed", {
-  is_observed <- c(TRUE, FALSE, TRUE, 'string', FALSE)
+  is_observed <- c(TRUE, FALSE, TRUE, "string", FALSE)
   then_expect <- c(TRUE, FALSE, TRUE, TRUE, TRUE)
 
   expect_error(whenever(is_observed, then_expect))

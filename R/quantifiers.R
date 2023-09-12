@@ -146,16 +146,16 @@ prop <- function(logical_vec, na.rm = FALSE) {
 #' @examples
 #'
 #' # Determine if 0.5 is a proportion (p) or a count (n)
-#' is_p_or_n(0.5)  # Returns "p"
+#' is_p_or_n(0.5) # Returns "p"
 #'
 #' # Determine if 10 is a proportion (p) or a count (n)
-#' is_p_or_n(10)  # Returns "n"
+#' is_p_or_n(10) # Returns "n"
 #'
 #' # Determine if 1 is a proportion (p) or a count (n) and allow error on 1
-#' is_p_or_n(1, error_on_1 = TRUE)  # Throws an error
+#' is_p_or_n(1, error_on_1 = TRUE) # Throws an error
 #'
 #' # Determine if 1 is a proportion (p) or a count (n) and allow error on nothing
-#' is_p_or_n(1, error_on_nothing = TRUE)  # Throws an error
+#' is_p_or_n(1, error_on_nothing = TRUE) # Throws an error
 #'
 #' @keywords internal
 #' @noRd
@@ -203,14 +203,14 @@ is_p_or_n <- function(num, error_on_1 = TRUE, error_on_nothing = TRUE) {
 #'
 #' @examples
 #' # Check if a valid logical vector
-#' is_logical_vec(c(TRUE, FALSE, TRUE))  # Returns TRUE
+#' is_logical_vec(c(TRUE, FALSE, TRUE)) # Returns TRUE
 #'
 #' # Check if an empty vector
-#' is_logical_vec(c())  # Returns FALSE
+#' is_logical_vec(c()) # Returns FALSE
 #'
 #' # Check if a vector with missing values
-#' is_logical_vec(c(TRUE, FALSE, NA))  # Returns TRUE
-#' is_logical_vec(c(NA, NA, NA))  # Returns FALSE
+#' is_logical_vec(c(TRUE, FALSE, NA)) # Returns TRUE
+#' is_logical_vec(c(NA, NA, NA)) # Returns FALSE
 #'
 #' @export
 is_logical_vec <- function(logical_vec) {
@@ -270,20 +270,20 @@ is_logical_vec <- function(logical_vec) {
 #' logical_vec <- c(TRUE, FALSE, TRUE, FALSE, TRUE)
 #'
 #' # Check if at least 2 TRUE values are present
-#' some_of(logical_vec, at_least = 2)  # TRUE
+#' some_of(logical_vec, at_least = 2) # TRUE
 #'
 #' # Check if at most 2 TRUE values are present
-#' some_of(logical_vec, at_most = 2)  # FALSE
+#' some_of(logical_vec, at_most = 2) # FALSE
 #'
 #' # Check if exactly 3 TRUE values are present
-#' some_of(logical_vec, exactly_equal = 3)  # TRUE
+#' some_of(logical_vec, exactly_equal = 3) # TRUE
 #'
 #' # Check if exactly 4 TRUE values are present
-#' some_of(logical_vec, exactly_equal = 3)  # FALSE
+#' some_of(logical_vec, exactly_equal = 3) # FALSE
 #'
 #' # Invalid usage: No specific quantifiers provided (error will be thrown)
-#' try(some_of(logical_vec))  # Error
-#'@export
+#' try(some_of(logical_vec)) # Error
+#' @export
 some_of <- function(logical_vec, ...) {
   validate_logical_vec(logical_vec)
 
@@ -341,7 +341,7 @@ some_of <- function(logical_vec, ...) {
 #' @family special quantifiers
 #'
 #' @examples
-#' #whenever() is designed to work with check_that()
+#' # whenever() is designed to work with check_that()
 #' df <- data.frame(x = 1:5, y = 6:10)
 #'
 #' df |>
@@ -354,8 +354,8 @@ some_of <- function(logical_vec, ...) {
 #' x <- 1:5
 #' y <- 6:10
 #'
-#' whenever(x > 3, y > 9, at_least = 1/2)  # TRUE
-#'@export
+#' whenever(x > 3, y > 9, at_least = 1 / 2) # TRUE
+#' @export
 whenever <- function(is_observed, then_expect, ...) {
   validate_logical_vec(is_observed)
   validate_logical_vec(then_expect)
@@ -480,7 +480,7 @@ at_least <- function(logical_vec, p = NULL, n = NULL, na.rm = FALSE) {
 #'
 #' @examples
 #' # Check if more than 70% of values are TRUE
-#' more_than(c(TRUE, TRUE, FALSE, TRUE), p = 0.7)  # Returns TRUE
+#' more_than(c(TRUE, TRUE, FALSE, TRUE), p = 0.7) # Returns TRUE
 #'
 #' @family basic_quantifiers
 #'
@@ -504,7 +504,7 @@ more_than <- function(logical_vec, p = NULL, n = NULL, na.rm = FALSE) {
 #'
 #' @examples
 #' # Check if at most 20% of values are TRUE
-#' at_most(c(TRUE, FALSE, TRUE, TRUE), p = 0.2)  # Returns TRUE
+#' at_most(c(TRUE, FALSE, TRUE, TRUE), p = 0.2) # Returns TRUE
 #'
 #' @family basic_quantifiers
 #'
@@ -529,7 +529,7 @@ at_most <- function(logical_vec, p = NULL, n = NULL, na.rm = FALSE) {
 #'
 #' @examples
 #' # Check if less than 10% of values are TRUE
-#' less_than(c(TRUE, FALSE, FALSE), p = 0.1)  # Returns FALSE
+#' less_than(c(TRUE, FALSE, FALSE), p = 0.1) # Returns FALSE
 #'
 #' @family basic_quantifiers
 #'
@@ -552,7 +552,7 @@ less_than <- function(logical_vec, p = NULL, n = NULL, na.rm = FALSE) {
 #' the specified value, otherwise \code{FALSE}.
 #' @examples
 #' # Check if all values are TRUE
-#' exactly_equal(c(TRUE, TRUE, TRUE), p = 1.0)  # Returns TRUE
+#' exactly_equal(c(TRUE, TRUE, TRUE), p = 1.0) # Returns TRUE
 #'
 #' @family basic_quantifiers
 #'

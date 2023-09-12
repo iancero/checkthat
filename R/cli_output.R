@@ -114,7 +114,7 @@ cli_throw_test_error <- function() {
 #'
 #' @returns (invisibly) A named character vector of check results.
 cli_check_summary <- function(test_results, test_labs) {
-  if (length(test_results) != length(test_labs)){
+  if (length(test_results) != length(test_labs)) {
     stop("length(test_results) != length(test_labs)")
   }
 
@@ -164,4 +164,3 @@ cli_print_checks <- function(test_results, test_labs, encourage = TRUE) {
     }
   }
 }
-

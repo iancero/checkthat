@@ -10,10 +10,10 @@
 #'          \code{\link{validate_proportion}}, \code{\link{validate_count}}
 #'
 #' @examples
-#' is_integerlike(3)      # TRUE
-#' is_integerlike(3.5)    # FALSE
-#' is_integerlike("3")    # FALSE
-#' is_integerlike(c(1,2)) # FALSE
+#' is_integerlike(3) # TRUE
+#' is_integerlike(3.5) # FALSE
+#' is_integerlike("3") # FALSE
+#' is_integerlike(c(1, 2)) # FALSE
 #' @export
 is_integerlike <- function(x) {
   if (!is.numeric(x)) {
@@ -39,8 +39,8 @@ is_integerlike <- function(x) {
 #'          \code{\link{validate_proportion}}, \code{\link{validate_count}}
 #'
 #' @examples
-#' is_proportion(0.5)  # TRUE
-#' is_proportion(1.2)  # FALSE
+#' is_proportion(0.5) # TRUE
+#' is_proportion(1.2) # FALSE
 #' is_proportion(-0.2) # FALSE
 #' @export
 is_proportion <- function(x) {
@@ -68,8 +68,8 @@ is_proportion <- function(x) {
 #'          \code{\link{validate_count}}, \code{\link{is_integerlike}}
 #'
 #' @examples
-#' validate_proportion(0.5)   # TRUE
-#' try(validate_proportion(1.2))   # Error
+#' validate_proportion(0.5) # TRUE
+#' try(validate_proportion(1.2)) # Error
 #' @export
 validate_proportion <- function(x) {
   if (!is_proportion(x)) {
@@ -92,10 +92,10 @@ validate_proportion <- function(x) {
 #'          \code{\link{validate_count}}, \code{\link{validate_proportion}}
 #'
 #' @examples
-#' is_count(0)   # TRUE
-#' is_count(3)   # TRUE
+#' is_count(0) # TRUE
+#' is_count(3) # TRUE
 #' is_count(0, include_zero = FALSE) # FALSE
-#' is_count(-1)  # FALSE
+#' is_count(-1) # FALSE
 #' is_count(1.5) # FALSE
 #' @export
 is_count <- function(x, include_zero = TRUE) {
@@ -124,10 +124,10 @@ is_count <- function(x, include_zero = TRUE) {
 #'          \code{\link{validate_proportion}}, \code{\link{is_integerlike}}
 #'
 #' @examples
-#' validate_count(0)   # TRUE
-#' validate_count(3)   # TRUE
+#' validate_count(0) # TRUE
+#' validate_count(3) # TRUE
 #' try(validate_count(0, include_zero = FALSE)) # Error: Not a valid count
-#' try(validate_count(-1))  # Error: Not a valid count value.
+#' try(validate_count(-1)) # Error: Not a valid count value.
 #' @export
 validate_count <- function(x, include_zero = TRUE) {
   if (!is_count(x, include_zero = include_zero)) {
