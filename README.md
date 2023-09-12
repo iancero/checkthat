@@ -96,6 +96,8 @@ you gave it (always unmodified). This allows you to easily integrate it
 directly into your data manipulation pipelines.
 
 ``` r
+library(tidyverse)
+
 new_mtcars <- mtcars |>
   select(mpg) |>
   mutate(km_per_litre = 0.425 * mpg) |>
