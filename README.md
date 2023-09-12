@@ -31,6 +31,20 @@ therefore provides functions that closely resemble the checks you
 already do by hand or by eye, so that it is easy for you to also express
 them in code as you go.
 
+## Installation
+
+The release version is available on CRAN.
+
+``` r
+install.packages("checkthat")
+```
+
+The development version is available on Github.
+
+``` r
+devtools::install("iancero/checkthat")
+```
+
 ## Basic usage
 
 Checkthat’s main function is `check_that(.data, ...)`, which takes a

@@ -33,6 +33,21 @@ Despite its importance, the data checking process is usually conducted informall
 
 The **checkthat** philosophy is that you already perform good data checks and you should keep doing it. But those checks would be even better if they lived in the code, rather than in your head. Checkthat therefore provides functions that closely resemble the checks you already do by hand or by eye, so that it is easy for you to also express them in code as you go.
 
+## Installation
+
+The release version is available on CRAN.
+
+```{r, eval=FALSE}
+install.packages("checkthat")
+```
+
+The development version is available on Github.
+
+```{r, eval=FALSE}
+devtools::install("iancero/checkthat")
+```
+
+
 ## Basic usage 
 
 Checkthat's main function is `check_that(.data, ...)`, which takes a dataframe as its first argument, followed by any number of assertions you want to check for that dataframe.
