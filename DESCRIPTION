@@ -9,7 +9,7 @@ Description: Provides a lightweight data validation and testing toolkit for R.
     existing workflow should be both quick and intuitive. The suite of 
     functions included therefore mirror the common data checks many users 
     already perform by hand or by eye. Additionally, the 'checkthat' package is 
-    optimized to work within tidyverse data manipulation pipelines.
+    optimized to work within 'tidyverse' data manipulation pipelines.
 License: MIT + file LICENSE
 URL: https://github.com/iancero/checkthat,
     https://iancero.github.io/checkthat/
