@@ -74,7 +74,7 @@ cli_check_success <- function() {
 #' @keywords internal
 #' @noRd
 #'
-#' @returns (invisibly) The unmodifiied \code{msg} string from above.
+#' @returns (invisibly) The unmodified \code{msg} string from above.
 cli_add_encouragement <- function(msg = encouraging_message(), p = .33) {
   if (stats::runif(1) < p) {
     cli::start_app(theme = checkthat_cli_theme())

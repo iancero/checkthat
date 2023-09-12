@@ -61,18 +61,6 @@ aggregator <- function(logical_vec, type = NULL, na.rm = FALSE) {
 #'
 #' @keywords internal
 #' @noRd
-#'
-#' @examples
-#' # The quantifier function generates other convenience functions like so
-#' at_least <- function(logical_vec, p = NULL, n = NULL, na.rm = FALSE) {
-#'   quantifier(`>=`)(logical_vec, p = p, n = n, na.rm = na.rm)
-#' }
-#'
-#' # Generate a function for checking if at least 50% of values are TRUE
-#' at_least_50_percent <- quantifier(`>=`)(p = 0.5)
-#'
-#' # Use the generated function on a logical vector
-#' at_least_50_percent(c(TRUE, TRUE, FALSE, TRUE)) # Returns TRUE
 quantifier <- function(operator) {
   function(logical_vec, p = NULL, n = NULL, na.rm = FALSE) {
     validate_logical_vec(logical_vec)
@@ -125,9 +113,6 @@ quantifier <- function(operator) {
 #' @keywords exported
 #' @export
 prop <- function(logical_vec, na.rm = FALSE) {
-
-
-  # @importFrom checkthat validate_logical_vec
   validate_logical_vec(logical_vec)
 
   if (na.rm) {
@@ -155,8 +140,8 @@ prop <- function(logical_vec, na.rm = FALSE) {
 #'                          not a valid proportion (p) or count (n)? Defaults to
 #'                          \code{TRUE}.
 #'
-#' @returns A character string: "p" if \code{num} represents a proportion, "n" if
-#'          it represents a count, and \code{FALSE} if neither applies.
+#' @returns A character string: "p" if \code{num} represents a proportion, "n"
+#'    if it represents a count, and \code{FALSE} if neither applies.
 #'
 #' @examples
 #'
@@ -206,13 +191,15 @@ is_p_or_n <- function(num, error_on_1 = TRUE, error_on_nothing = TRUE) {
 
 #' Check if a Vector is a Valid Logical Vector
 #'
-#' This function checks if a given vector is a valid logical vector. A valid logical vector
-#' is one that contains only logical values (\code{TRUE} or \code{FALSE}), has a length of
-#' at least 1, and does not consist entirely of missing values (\code{NA}).
+#' This function checks if a given vector is a valid logical vector. A valid
+#' logical vector is one that contains only logical values (\code{TRUE} or
+#' \code{FALSE}), has a length of at least 1, and does not consist entirely of
+#' missing values (\code{NA}).
 #'
 #' @param logical_vec A vector to be evaluated.
 #'
-#' @returns \code{TRUE} if \code{logical_vec} is a valid logical vector, otherwise \code{FALSE}.
+#' @returns \code{TRUE} if \code{logical_vec} is a valid logical vector,
+#'    otherwise \code{FALSE}.
 #'
 #' @examples
 #' # Check if a valid logical vector
@@ -393,6 +380,7 @@ whenever <- function(is_observed, then_expect, ...) {
 #'    row(s) to check. If a logical vector, it must have exactly 1 TRUE element
 #'    (i.e., that can be used to infer the row of interest).
 #' @param ... A set of logical conditions to be checked.
+#'
 #' @returns A logical value indicating whether ALL specified conditions hold
 #'    true for the specified data row (i.e., \code{case}).
 #'
@@ -465,6 +453,7 @@ for_case <- function(case, ...) {
 #'
 #' @returns \code{TRUE} if the condition is met for at least the specified
 #'    proportion or count, otherwise \code{FALSE}.
+#'
 #' @examples
 #' # Check if at least 50% of values are TRUE
 #' at_least(c(TRUE, TRUE, FALSE), p = 0.5) # Returns TRUE
@@ -488,6 +477,7 @@ at_least <- function(logical_vec, p = NULL, n = NULL, na.rm = FALSE) {
 #'
 #' @returns \code{TRUE} if the condition is met for more than the specified
 #'    proportion or count, otherwise \code{FALSE}.
+#'
 #' @examples
 #' # Check if more than 70% of values are TRUE
 #' more_than(c(TRUE, TRUE, FALSE, TRUE), p = 0.7)  # Returns TRUE
@@ -511,6 +501,7 @@ more_than <- function(logical_vec, p = NULL, n = NULL, na.rm = FALSE) {
 #'
 #' @returns \code{TRUE} if the condition is met for at most the specified
 #'    proportion or count, otherwise \code{FALSE}.
+#'
 #' @examples
 #' # Check if at most 20% of values are TRUE
 #' at_most(c(TRUE, FALSE, TRUE, TRUE), p = 0.2)  # Returns TRUE
@@ -535,6 +526,7 @@ at_most <- function(logical_vec, p = NULL, n = NULL, na.rm = FALSE) {
 #'
 #' @returns \code{TRUE} if the condition is met for less than the specified
 #'    proportion or count, otherwise \code{FALSE}.
+#'
 #' @examples
 #' # Check if less than 10% of values are TRUE
 #' less_than(c(TRUE, FALSE, FALSE), p = 0.1)  # Returns FALSE

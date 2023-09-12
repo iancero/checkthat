@@ -10,12 +10,14 @@ is_logical_vec(logical_vec)
 \item{logical_vec}{A vector to be evaluated.}
 }
 \value{
-\code{TRUE} if \code{logical_vec} is a valid logical vector, otherwise \code{FALSE}.
+\code{TRUE} if \code{logical_vec} is a valid logical vector,
+otherwise \code{FALSE}.
 }
 \description{
-This function checks if a given vector is a valid logical vector. A valid logical vector
-is one that contains only logical values (\code{TRUE} or \code{FALSE}), has a length of
-at least 1, and does not consist entirely of missing values (\code{NA}).
+This function checks if a given vector is a valid logical vector. A valid
+logical vector is one that contains only logical values (\code{TRUE} or
+\code{FALSE}), has a length of at least 1, and does not consist entirely of
+missing values (\code{NA}).
 }
 \examples{
 # Check if a valid logical vector
