@@ -77,8 +77,6 @@
 
     
     
-<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/iancero/checkthat" class="external-link">checkthat</a></span><span class="op">)</span></span></code></pre></div>
 <p>The <strong>checkthat</strong> philosophy is that you already perform
 good data checks and you should keep doing it. But those checks would be
 even better if they lived in the code, rather than in your head.
@@ -93,7 +91,7 @@ which takes a dataframe as its first argument, followed by any number of
 assertions you want to check for that dataframe.</p>
 <p>When all checks pass, you get a brief message confirming that’s the
 case.</p>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/iancero/checkthat" class="external-link">checkthat</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">mtcars</span> <span class="op">|&gt;</span></span>
@@ -106,7 +104,7 @@ case.</p>
 error, halting the potentially risky execution of subsequent code. It
 then gives you get a detailed breakdown of what the outcome was for each
 test.</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">mtcars</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="../reference/check_that.html">check_that</a></span><span class="op">(</span></span>
 <span>    <span class="fu"><a href="https://rdrr.io/r/base/all.html" class="external-link">all</a></span><span class="op">(</span><span class="va">cyl</span> <span class="op">&gt;</span> <span class="fl">2</span><span class="op">)</span>,</span>
@@ -128,7 +126,7 @@ base R’s existing logical functions (e.g., <code><a href="https://rdrr.io/r/ba
 functions. Theses helper functions are designed to be both readable and
 to mirror in code what you already do manually by eye-balling a
 dataset.</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">mtcars</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="../reference/check_that.html">check_that</a></span><span class="op">(</span></span>
 <span>    <span class="fu"><a href="../reference/some_of.html">some_of</a></span><span class="op">(</span><span class="va">cyl</span> <span class="op">&gt;</span> <span class="fl">4</span>, at_least <span class="op">=</span> <span class="fl">.30</span>, at_most <span class="op">=</span> <span class="fl">25</span><span class="op">)</span>,</span>
@@ -144,7 +142,7 @@ dataset.</p>
 same <code>.data</code> you gave it (always unmodified). This allows you
 to easily integrate it directly into your data manipulation
 pipelines.</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">new_mtcars</span> <span class="op">&lt;-</span> <span class="va">mtcars</span> <span class="op">|&gt;</span></span>
@@ -193,7 +191,7 @@ plausible range.</li>
 <p>Here, the first check throws an error and stopS the pipeline. It also
 saves us from an inaccurate <code>desired_mpg</code> that the second
 check would not have caught.</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">mtcars</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>type <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a></span><span class="op">(</span><span class="va">wt</span> <span class="op">&lt;</span> <span class="fl">3</span>, labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"sm"</span>, <span class="st">"lg"</span><span class="op">)</span>, ordered <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="../reference/check_that.html">check_that</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">max</a></span><span class="op">(</span><span class="va">wt</span><span class="op">[</span><span class="va">type</span> <span class="op">==</span> <span class="st">"sm"</span><span class="op">]</span><span class="op">)</span> <span class="op">&lt;=</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">min</a></span><span class="op">(</span><span class="va">wt</span><span class="op">[</span><span class="va">type</span> <span class="op">==</span> <span class="st">"lg"</span><span class="op">]</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
@@ -246,7 +244,7 @@ comparison operators: <code>=</code>, <code>&lt;</code>,
 takes a logical vector as its first argument and requires you to specify
 a proportion (<code>p</code>) or count (<code>n</code>) of those values
 that must be true.</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">mtcars</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="../reference/check_that.html">check_that</a></span><span class="op">(</span></span>
 <span>    <span class="fu"><a href="../reference/at_least.html">at_least</a></span><span class="op">(</span><span class="va">mpg</span> <span class="op">&lt;</span> <span class="fl">35</span>, p <span class="op">=</span> <span class="fl">.95</span><span class="op">)</span>,</span>
@@ -274,7 +272,7 @@ know it should probably be <code>at_least</code> 30%, but
 <code>at_most</code> 25 total cases in your dataset. Anything outside
 that range would be implausible and so you want to guard it with
 <code><a href="../reference/check_that.html">check_that()</a></code>.</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">mtcars</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="../reference/check_that.html">check_that</a></span><span class="op">(</span></span>
 <span>    <span class="fu"><a href="../reference/some_of.html">some_of</a></span><span class="op">(</span><span class="va">cyl</span> <span class="op">&gt;</span> <span class="fl">4</span>, at_least <span class="op">=</span> <span class="fl">.30</span>, at_most <span class="op">=</span> <span class="fl">25</span><span class="op">)</span>,</span>
@@ -312,7 +310,7 @@ question. For those cases, <code><a href="../reference/check_that.html">check_th
 <p>In short, <code>.d</code> is a copy of the data you provided to
 <code><a href="../reference/check_that.html">check_that()</a></code>, which you can use to write checks about the
 whole dataset.</p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">mtcars</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="../reference/check_that.html">check_that</a></span><span class="op">(</span></span>
 <span>    <span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">.d</span><span class="op">)</span> <span class="op">&gt;</span> <span class="fl">10</span>,</span>
@@ -323,7 +321,7 @@ whole dataset.</p>
 of your dataset (e.g., pivots, nests, joins). In the case of pivoting,
 you might want to check that the dataset have the correct anticipated
 dimensions.</p>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyr.tidyverse.org" class="external-link">tidyr</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">mtcars</span> <span class="op">|&gt;</span></span>
@@ -339,7 +337,7 @@ dimensions.</p>
 <p>After a join, you may want to check that there is a new column in the
 expected location, but also that there are no unanticipated new
 rows.</p>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">cyl_ratings_df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>cyl <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">4</span>, <span class="fl">6</span>, <span class="fl">8</span><span class="op">)</span>, group <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"C"</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">mtcars</span> <span class="op">|&gt;</span></span>
