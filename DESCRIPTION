@@ -1,6 +1,6 @@
 Package: checkthat
 Title: Intuitive Unit Testing Tools for Data Manipulation
-Version: 0.1.0
+Version: 0.1.0.9000
 Authors@R: 
     person("Ian", "Cero", , "ian_cero@urmc.rochester.edu", role = c("aut", 
         "cre", "cph"), comment = c(ORCID = "0000-0002-2862-0450"))
