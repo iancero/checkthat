@@ -46,7 +46,6 @@ The development version is available on Github.
 remotes::install_github("iancero/checkthat")
 ```
 
-
 ## Basic usage 
 
 Checkthat's main function is `check_that(.data, ...)`, which takes a dataframe as its first argument, followed by any number of assertions you want to check for that dataframe.

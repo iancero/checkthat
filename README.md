@@ -1,6 +1,5 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-<!-- [![CRAN status](https://www.r-pkg.org/badges/version/checkthat)](https://CRAN.R-project.org/package=checkthat) -->
 
 # checkthat
 
@@ -8,6 +7,8 @@
 
 [![Lifecycle:
 experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
+[![CRAN
+status](https://www.r-pkg.org/badges/version/checkthat)](https://CRAN.R-project.org/package=checkthat)
 [![R-CMD-check](https://github.com/iancero/checkthat/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/iancero/checkthat/actions/workflows/R-CMD-check.yaml)
 [![Codecov test
 coverage](https://codecov.io/gh/iancero/checkthat/branch/main/graph/badge.svg)](https://app.codecov.io/gh/iancero/checkthat?branch=main)
@@ -41,7 +42,7 @@ install.packages("checkthat")
 The development version is available on Github.
 
 ``` r
-devtools::install("iancero/checkthat")
+remotes::install_github("iancero/checkthat")
 ```
 
 ## Basic usage
