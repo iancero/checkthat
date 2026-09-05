@@ -1,93 +1,33 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://iancero.github.io/checkthat/404.html</loc>
-  </url>
-  <url>
-    <loc>https://iancero.github.io/checkthat/CODE_OF_CONDUCT.html</loc>
-  </url>
-  <url>
-    <loc>https://iancero.github.io/checkthat/CONTRIBUTING.html</loc>
-  </url>
-  <url>
-    <loc>https://iancero.github.io/checkthat/LICENSE-text.html</loc>
-  </url>
-  <url>
-    <loc>https://iancero.github.io/checkthat/LICENSE.html</loc>
-  </url>
-  <url>
-    <loc>https://iancero.github.io/checkthat/SUPPORT.html</loc>
-  </url>
-  <url>
-    <loc>https://iancero.github.io/checkthat/articles/checkthat.html</loc>
-  </url>
-  <url>
-    <loc>https://iancero.github.io/checkthat/articles/index.html</loc>
-  </url>
-  <url>
-    <loc>https://iancero.github.io/checkthat/authors.html</loc>
-  </url>
-  <url>
-    <loc>https://iancero.github.io/checkthat/index.html</loc>
-  </url>
-  <url>
-    <loc>https://iancero.github.io/checkthat/news/index.html</loc>
-  </url>
-  <url>
-    <loc>https://iancero.github.io/checkthat/reference/at_least.html</loc>
-  </url>
-  <url>
-    <loc>https://iancero.github.io/checkthat/reference/at_most.html</loc>
-  </url>
-  <url>
-    <loc>https://iancero.github.io/checkthat/reference/check_that.html</loc>
-  </url>
-  <url>
-    <loc>https://iancero.github.io/checkthat/reference/checkthat-package.html</loc>
-  </url>
-  <url>
-    <loc>https://iancero.github.io/checkthat/reference/exactly_equal.html</loc>
-  </url>
-  <url>
-    <loc>https://iancero.github.io/checkthat/reference/for_case.html</loc>
-  </url>
-  <url>
-    <loc>https://iancero.github.io/checkthat/reference/index.html</loc>
-  </url>
-  <url>
-    <loc>https://iancero.github.io/checkthat/reference/is_count.html</loc>
-  </url>
-  <url>
-    <loc>https://iancero.github.io/checkthat/reference/is_integerlike.html</loc>
-  </url>
-  <url>
-    <loc>https://iancero.github.io/checkthat/reference/is_logical_vec.html</loc>
-  </url>
-  <url>
-    <loc>https://iancero.github.io/checkthat/reference/is_proportion.html</loc>
-  </url>
-  <url>
-    <loc>https://iancero.github.io/checkthat/reference/less_than.html</loc>
-  </url>
-  <url>
-    <loc>https://iancero.github.io/checkthat/reference/more_than.html</loc>
-  </url>
-  <url>
-    <loc>https://iancero.github.io/checkthat/reference/prop.html</loc>
-  </url>
-  <url>
-    <loc>https://iancero.github.io/checkthat/reference/some_of.html</loc>
-  </url>
-  <url>
-    <loc>https://iancero.github.io/checkthat/reference/validate_count.html</loc>
-  </url>
-  <url>
-    <loc>https://iancero.github.io/checkthat/reference/validate_logical_vec.html</loc>
-  </url>
-  <url>
-    <loc>https://iancero.github.io/checkthat/reference/validate_proportion.html</loc>
-  </url>
-  <url>
-    <loc>https://iancero.github.io/checkthat/reference/whenever.html</loc>
-  </url>
+<urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
+<url><loc>https://iancero.github.io/checkthat/404.html</loc></url>
+<url><loc>https://iancero.github.io/checkthat/CODE_OF_CONDUCT.html</loc></url>
+<url><loc>https://iancero.github.io/checkthat/CONTRIBUTING.html</loc></url>
+<url><loc>https://iancero.github.io/checkthat/LICENSE-text.html</loc></url>
+<url><loc>https://iancero.github.io/checkthat/LICENSE.html</loc></url>
+<url><loc>https://iancero.github.io/checkthat/SUPPORT.html</loc></url>
+<url><loc>https://iancero.github.io/checkthat/articles/checkthat.html</loc></url>
+<url><loc>https://iancero.github.io/checkthat/articles/index.html</loc></url>
+<url><loc>https://iancero.github.io/checkthat/authors.html</loc></url>
+<url><loc>https://iancero.github.io/checkthat/index.html</loc></url>
+<url><loc>https://iancero.github.io/checkthat/news/index.html</loc></url>
+<url><loc>https://iancero.github.io/checkthat/reference/at_least.html</loc></url>
+<url><loc>https://iancero.github.io/checkthat/reference/at_most.html</loc></url>
+<url><loc>https://iancero.github.io/checkthat/reference/check_that.html</loc></url>
+<url><loc>https://iancero.github.io/checkthat/reference/checkthat-package.html</loc></url>
+<url><loc>https://iancero.github.io/checkthat/reference/exactly_equal.html</loc></url>
+<url><loc>https://iancero.github.io/checkthat/reference/for_case.html</loc></url>
+<url><loc>https://iancero.github.io/checkthat/reference/index.html</loc></url>
+<url><loc>https://iancero.github.io/checkthat/reference/is_count.html</loc></url>
+<url><loc>https://iancero.github.io/checkthat/reference/is_integerlike.html</loc></url>
+<url><loc>https://iancero.github.io/checkthat/reference/is_logical_vec.html</loc></url>
+<url><loc>https://iancero.github.io/checkthat/reference/is_proportion.html</loc></url>
+<url><loc>https://iancero.github.io/checkthat/reference/less_than.html</loc></url>
+<url><loc>https://iancero.github.io/checkthat/reference/more_than.html</loc></url>
+<url><loc>https://iancero.github.io/checkthat/reference/prop.html</loc></url>
+<url><loc>https://iancero.github.io/checkthat/reference/some_of.html</loc></url>
+<url><loc>https://iancero.github.io/checkthat/reference/validate_count.html</loc></url>
+<url><loc>https://iancero.github.io/checkthat/reference/validate_logical_vec.html</loc></url>
+<url><loc>https://iancero.github.io/checkthat/reference/validate_proportion.html</loc></url>
+<url><loc>https://iancero.github.io/checkthat/reference/whenever.html</loc></url>
 </urlset>
+
