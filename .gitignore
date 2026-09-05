@@ -6,5 +6,6 @@
 .quarto
 docs
 practice.Rmd
+practice.qmd
 notes.txt
 inst/doc
