@@ -29,10 +29,10 @@ more_than(c(TRUE, TRUE, FALSE, TRUE), p = 0.7) # Returns TRUE
 
 }
 \seealso{
-Other basic_quantifiers: 
-\code{\link{at_least}()},
-\code{\link{at_most}()},
-\code{\link{exactly_equal}()},
-\code{\link{less_than}()}
+Other basic_quantifiers:
+\code{\link[=at_least]{at_least()}},
+\code{\link[=at_most]{at_most()}},
+\code{\link[=exactly_equal]{exactly_equal()}},
+\code{\link[=less_than]{less_than()}}
 }
 \concept{basic_quantifiers}

@@ -53,8 +53,8 @@ backwards_letters <- rev(letters)
 for_case(3, backwards_letters == "x") # TRUE
 }
 \seealso{
-Other special quantifiers: 
-\code{\link{some_of}()},
-\code{\link{whenever}()}
+Other special quantifiers:
+\code{\link[=some_of]{some_of()}},
+\code{\link[=whenever]{whenever()}}
 }
 \concept{special quantifiers}

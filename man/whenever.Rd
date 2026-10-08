@@ -49,8 +49,8 @@ y <- 6:10
 whenever(x > 3, y > 9, at_least = 1 / 2) # TRUE
 }
 \seealso{
-Other special quantifiers: 
-\code{\link{for_case}()},
-\code{\link{some_of}()}
+Other special quantifiers:
+\code{\link[=for_case]{for_case()}},
+\code{\link[=some_of]{some_of()}}
 }
 \concept{special quantifiers}

@@ -60,8 +60,8 @@ some_of(logical_vec, exactly_equal = 3) # FALSE
 try(some_of(logical_vec)) # Error
 }
 \seealso{
-Other special quantifiers: 
-\code{\link{for_case}()},
-\code{\link{whenever}()}
+Other special quantifiers:
+\code{\link[=for_case]{for_case()}},
+\code{\link[=whenever]{whenever()}}
 }
 \concept{special quantifiers}

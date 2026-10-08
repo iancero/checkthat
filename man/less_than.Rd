@@ -30,10 +30,10 @@ less_than(c(TRUE, FALSE, FALSE), p = 0.1) # Returns FALSE
 
 }
 \seealso{
-Other basic_quantifiers: 
-\code{\link{at_least}()},
-\code{\link{at_most}()},
-\code{\link{exactly_equal}()},
-\code{\link{more_than}()}
+Other basic_quantifiers:
+\code{\link[=at_least]{at_least()}},
+\code{\link[=at_most]{at_most()}},
+\code{\link[=exactly_equal]{exactly_equal()}},
+\code{\link[=more_than]{more_than()}}
 }
 \concept{basic_quantifiers}
