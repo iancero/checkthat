@@ -10,3 +10,7 @@ practice.qmd
 notes.txt
 inst/doc
 practice2.qmd
+
+/.quarto/
+**/*.quarto_ipynb
+practice3.qmd
