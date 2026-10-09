@@ -56,7 +56,7 @@ check_that <- function(.data, ...) {
 }
 
 #' @export
-check_that.default <- function(.data, ..., print = TRUE, raise_error = TRUE) {
+check_that.default <- function(.data, ..., print = TRUE, raise_error = TRUE, as_df = FALSE) {
 
   dots <- rlang::enquos(...)
   mask <- new_check_mask(.data)
