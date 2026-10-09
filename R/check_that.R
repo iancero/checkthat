@@ -107,7 +107,7 @@ report_checks <- function(.data, results, print, raise_error, as_df) {
   }
   
   if (raise_error) {
-    stopifnot('At least one test failed' = all(results$result == TRUE))
+    stopifnot('At least one test failed' = isTRUE(all(results$result)))
   }
   
   invisible(.data)
