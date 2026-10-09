@@ -1,6 +1,11 @@
 # checkthat (development version)
 
+## Breaking changes
+
+## Major changes
+
 ## Minor changes
+* Errors now thrown by base::stopifnot(), rather than cli::abort()
 * Fixed installation instructions in README
 * Added CRAN badge to README
 
