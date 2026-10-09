@@ -61,24 +61,12 @@ check_that.default <- function(.data, ..., print = TRUE, raise_error = TRUE) {
   dots <- rlang::enquos(...)
   mask <- new_check_mask(.data)
 
-  test <- purrr::map_chr(dots, .f = rlang::as_label)
-  result <- purrr::map_lgl(dots, .f = \(dot) rlang::eval_tidy(dot, data = mask))
-
-  results <- tibble::tibble(test, result)
-
-  results
-  # test_labs <- purrr::map_chr(dots, .f = rlang::as_label)
-  # test_results <- purrr::map_lgl(dots, .f = ~ rlang::eval_tidy(.x, .d = .data))
-
-  # if (print) {
-  #   cli_print_checks(test_results, test_labs, encourage = encourage)
-  # }
-
-  # if (raise_error) {
-  #     stopifnot('At least one test failed' = all(results$result == TRUE))
-  #   }
-
-  # invisible(.data)
+  results <- tibble::tibble(
+    test = purrr::map_chr(dots, .f = rlang::as_label),
+    result = purrr::map_lgl(dots, .f = \(dot) rlang::eval_tidy(dot, data = mask))
+  )
+ 
+  report_checks(.data, results, print = print, raise_error = raise_error, as_df = as_df)
 }
 
 #' @export
@@ -93,8 +81,27 @@ check_that.data.frame <- function(.data, ..., print = TRUE, raise_error = TRUE, 
       values_to = 'result'
     )
   
-  if(as_df) return(results)
-  
+  report_checks(.data, results, print = print, raise_error = raise_error, as_df = as_df)
+}
+
+new_check_mask <- function(.data){
+  # TODO: document this and figure out the best placement
+    if(is.list(.data) | is.data.frame(.data)){
+        mask <- rlang::as_data_mask(.data)
+    } else {
+        mask <- rlang::as_data_mask(NULL)
+    }
+    mask$.d <- .data
+
+    mask
+}
+
+report_checks <- function(.data, results, print, raise_error, as_df) {
+  # TODO: add documentation
+  if(as_df) {
+    return(results)
+  }
+
   if(print) {
     print(results)
   }
@@ -104,16 +111,4 @@ check_that.data.frame <- function(.data, ..., print = TRUE, raise_error = TRUE, 
   }
   
   invisible(.data)
-}
-
-# TODO: document this and figure out the best placement
-new_check_mask <- function(.data){
-    if(is.list(.data) | is.data.frame(.data)){
-        mask <- rlang::as_data_mask(.data)
-    } else {
-        mask <- rlang::as_data_mask(NULL)
-    }
-    mask$.d <- .data
-
-    mask
 }
