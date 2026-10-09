@@ -74,9 +74,9 @@ check_that.default <- function(.data, ..., print = TRUE, raise_error = TRUE) {
   #   cli_print_checks(test_results, test_labs, encourage = encourage)
   # }
 
-  # if (raise_error & any(test_results != TRUE)) {
-  #   cli_throw_test_error()
-  # }
+  # if (raise_error) {
+  #     stopifnot('At least one test failed' = all(results$result == TRUE))
+  #   }
 
   # invisible(.data)
 }
@@ -96,11 +96,11 @@ check_that.data.frame <- function(.data, ..., print = TRUE, raise_error = TRUE, 
   if(as_df) return(results)
   
   if(print) {
-    # TODO: function to report results
+    print(results)
   }
   
-  if(raise_error & any(results$result != TRUE)) {
-    cli_throw_test_error()
+  if (raise_error) {
+    stopifnot('At least one test failed' = all(results$result == TRUE))
   }
   
   invisible(.data)

@@ -87,23 +87,6 @@ cli_add_encouragement <- function(msg = encouraging_message(), p = .33) {
   invisible(msg)
 }
 
-#' Internal Function to Trigger a Test Error in the CLI
-#'
-#' This is an internal function that is not intended for external use. It
-#' triggers a test error message in the Command Line Interface (CLI) using the
-#' customized checkthat theme.
-#'
-#' @returns \value{None}
-#'
-#' @keywords internal
-#' @noRd
-cli_throw_test_error <- function() {
-  cli::start_app(theme = checkthat_cli_theme())
-  cli::cli_text("")
-  cli::cli_text("")
-  cli::cli_abort("At least one data check failed.")
-}
-
 #' Internal Function to Display a Summary of Test Results in the CLI
 #'
 #' This is an internal function that is not intended for external use. It
