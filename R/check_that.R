@@ -58,19 +58,19 @@ check_that <- function(.data, ...) {
 #' @export
 check_that.default <- function(.data, ..., print = TRUE, raise_error = TRUE, as_df = FALSE) {
 
-  dots <- rlang::enquos(...)
+  dots <- rlang::enquos(..., .named = TRUE)
   mask <- new_check_mask(.data)
 
-  results <- tibble::tibble(
-    test = purrr::map_chr(dots, .f = rlang::as_label),
-    result = purrr::map_lgl(dots, .f = \(dot) rlang::eval_tidy(dot, data = mask))
-  )
+  results <- dots |> 
+    purrr::map_lgl(rlang::eval_tidy, data = mask) |> 
+    tibble::enframe(name = 'test', value = 'result')
  
   report_checks(.data, results, print = print, raise_error = raise_error, as_df = as_df)
 }
 
 #' @export
 check_that.data.frame <- function(.data, ..., print = TRUE, raise_error = TRUE, as_df = FALSE){
+  
   dots <- rlang::enquos(..., .named = TRUE)
   
   results <- .data |> 
