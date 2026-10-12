@@ -51,64 +51,89 @@
 #'   )
 #'
 #' @export
-check_that <- function(.data, ...) {
-  UseMethod("check_that")
+check_that <- function(.data, ..., on_fail = c('error', 'warn', 'message'), on_success = c('message', 'none')) {
+  on_fail <- rlang::arg_match(on_fail)
+  on_success <- rlang::arg_match(on_success)
+
+  results <- audit_whether(.data, ...)
+
+  any_failures <- !isTRUE(all(results$result))
+  if (any_failures) {
+    print_audit(results)
+
+    msg <- format_failures(results)
+    switch(on_fail,
+      'error' = cli::cli_abort(msg),
+      'warn' = cli::cli_warn(msg),
+      'message' = cli::cli_alert_danger(msg)
+    )
+  } else {
+    msg <- format_successes()
+    switch(on_success,
+      'message' = cli::cli_alert_success(msg),
+      'none' = NULL
+    )
+  }
+  
+  invisible(.data)
 }
 
 #' @export
-check_that.default <- function(.data, ..., print = TRUE, raise_error = TRUE, as_df = FALSE) {
+audit_whether <- function(.data, ...) {
+  UseMethod('audit_whether')
+}
 
+#' @export
+audit_whether.default <- function(.data, ...) {
   dots <- rlang::enquos(..., .named = TRUE)
-  mask <- new_check_mask(.data)
+  mask <- new_test_mask(.data)
 
-  results <- dots |> 
+  dots |> 
     purrr::map_lgl(rlang::eval_tidy, data = mask) |> 
     tibble::enframe(name = 'test', value = 'result')
- 
-  report_checks(.data, results, print = print, raise_error = raise_error, as_df = as_df)
 }
 
 #' @export
-check_that.data.frame <- function(.data, ..., print = TRUE, raise_error = TRUE, as_df = FALSE){
-  
+audit_whether.data.frame <- function(.data, ...){
   dots <- rlang::enquos(..., .named = TRUE)
   
-  results <- .data |> 
+  # TODO: implement .d pronoun
+
+
+  .data |> 
     dplyr::summarize(!!!dots) |> 
     tidyr::pivot_longer(
       cols = all_of(names(dots)),
       names_to = 'test',
       values_to = 'result'
     )
-  
-  report_checks(.data, results, print = print, raise_error = raise_error, as_df = as_df)
 }
 
-new_check_mask <- function(.data){
+new_test_mask <- function(.data){
   # TODO: document this and figure out the best placement
     if(is.list(.data) | is.data.frame(.data)){
         mask <- rlang::as_data_mask(.data)
     } else {
         mask <- rlang::as_data_mask(NULL)
     }
+  
     mask$.d <- .data
 
     mask
 }
 
-report_checks <- function(.data, results, print, raise_error, as_df) {
-  # TODO: add documentation
-  if(as_df) {
-    return(results)
-  }
+print_audit <- function(results){
+  print(results)
+  cat('\n')
+}
 
-  if(print) {
-    print(results)
-  }
+format_failures <- function(results) {
+  n_tests <- nrow(results)
+  n_failures <- n_tests - sum(results$result %in% TRUE) # account for both FALSE and NA
   
-  if (raise_error) {
-    stopifnot('At least one test failed' = isTRUE(all(results$result)))
-  }
-  
-  invisible(.data)
+  glue::glue('{n_failures} of {n_tests} checks failed.')  
+}
+
+format_successes <- function() {  
+  'All checks passing'  
 }

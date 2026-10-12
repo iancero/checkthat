@@ -4,7 +4,7 @@
 \alias{check_that}
 \title{Check that assertions about a dataframe are true/false}
 \usage{
-check_that(.data, ...)
+check_that(.data, ..., print = print, raise_error = raise_error)
 }
 \arguments{
 \item{.data}{A dataframe to be tested.}
