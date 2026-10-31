@@ -96,10 +96,11 @@ audit_whether.default <- function(.data, ...) {
 #' @export
 audit_whether.data.frame <- function(.data, ...){
   dots <- rlang::enquos(..., .named = TRUE)
-  
+
   # TODO: implement .d pronoun
+  .d <- .data
 
-
+  # TODO: implement .by
   .data |> 
     dplyr::summarize(!!!dots) |> 
     tidyr::pivot_longer(
