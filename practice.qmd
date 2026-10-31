@@ -1,0 +1,105 @@
+
+```{r}
+#| message: false
+devtools::load_all()
+
+library(tidyverse)
+
+data(mtcars)
+```
+
+
+```{r}
+devtools::load_all()
+
+mtcars |> 
+    group_by(cyl) |> 
+    check_that(
+        all(mpg > 20),
+        !any(is.na(vs)),
+        nrow(.d) > 2, # can we make a call to the whole dataset?
+        n() >=  .25 * nrow(.d), # can we compar group data to whole dataset?
+        on_fail = 'message'
+    )
+
+x <- rlang::quo(a > b)
+
+x <- rlang::as_data_pronoun(mtcars)
+
+str(x)
+```
+
+
+```{r}
+fn <- function(x = c("foo", "bar")) rlang::arg_match(x)
+fn("bar")
+
+# Throws an informative error for mismatches:
+try(fn("b"))
+try(fn("baz"))
+
+# Use the bare-bones version with explicit values for speed:
+arg_match0("bar", c("foo", "bar", "baz"))
+
+# For convenience:
+fn1 <- function(x = c("bar", "baz", "foo")) fn3(x)
+fn2 <- function(x = c("baz", "bar", "foo")) fn3(x)
+fn3 <- function(x) rlang::arg_match0(x, c("foo", "bar", "baz"))
+fn1()
+fn2("bar")
+try(fn3("zoo"))
+
+
+```
+
+
+```{r}
+fn <- function(x, on_fail = c('error', 'warn', 'message', 'none')) {
+    rlang::arg_match(on_fail)
+}
+
+fn(1, 'error')
+
+switch()
+```
+
+
+```{r}
+add_d_to_quo_env <- function(q, .d) {
+    q |> 
+        purrr:::modify(
+            \(x) {
+                rlang::quo_set_env(
+                    quo = x,
+                    env = rlang::new_environment(
+                        data = list(.d = .d),
+                        parent = rlang::quo_get_env(x)
+                    )
+                )
+            }
+        )
+
+    # for (i in seq_along(q)) {
+    #     parent_env <- rlang::quo_get_env(q[[i]])
+    #     child_env <- rlang::env(parent_env, .d = .d)
+    #     q[[i]] <- rlang::quo_set_env(q[[i]], child_env)
+    # }
+    
+    # q
+}
+
+my_func <- function(.data, ...) {
+    dots <- rlang::enquos(..., .named = TRUE) |> 
+        add_d_to_quo_env(.d = .data)
+
+    .data |> 
+        dplyr::summarise(!!! dots)
+}
+
+mtcars |> 
+    dplyr::group_by(cyl) |> 
+    my_func(
+        mean(cyl) + nrow(.d), 
+        mean(mpg / 2) + dplyr::n_groups(.d)
+    ) 
+```
